@@ -6,6 +6,6 @@ int parsing(int argc, char **argv)
     if (check_arguments(argc, argv) == INVALID)
         return (err("bad args"));
     if (read_map(argv[1]) == INVALID)
-        return (INVALID); 
+        return (INVALID);
     return (VALID);
 }

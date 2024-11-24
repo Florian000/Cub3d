@@ -1,5 +1,6 @@
 #include "../include/cub3d.h"
 
+//gives accessto data
 t_data  *get_data(void)
 {
     static t_data data;
@@ -15,6 +16,7 @@ int main(int argc, char **argv)
         free_data(get_data());
         return (err("bad parsing"));
     }
+    print_brut_map();
     free_data(get_data());
     return (VALID);
 }

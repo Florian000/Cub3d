@@ -34,6 +34,14 @@ void    *err_null(char *str);
 //free
 int     free_data(t_data *data);
 
+
+
+
+
+
+//debug
+void    print_brut_map(void);
+
 //main
 t_data  *get_data(void);
 int     main(int argc, char **argv);

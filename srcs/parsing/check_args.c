@@ -45,11 +45,55 @@ int check_line(char *str)
     return (VALID);
 }
 
+//reallocates one more space to the brut map
+int add_space_brutmap(t_data *data)
+{
+    char    **new_map;
+    int     size;
+    int     i;
+
+    size = 0;
+    if (data->brut_map)
+    {
+        while (data->brut_map[size])
+            size++;
+    }
+    new_map = malloc((size + 2) * sizeof(char *));
+    if (!new_map)
+        return (INVALID);
+    i = 0;
+    while (i < size)
+    {
+        new_map[i] = data->brut_map[i];
+        i++;
+    }
+    new_map[size] = NULL;
+    new_map[size + 1] = NULL;
+    if (data->brut_map)
+        free(data->brut_map);
+    data->brut_map = new_map;
+    return (size);
+}
+
+//adds a line to creat brutmap in data (without new gnl)
+int add_line(char *src)
+{
+    t_data  *data;
+    int     i;
+
+    data = get_data();
+    i = add_space_brutmap(data);
+    data->brut_map[i] = ft_strdup(src);
+    if (data->brut_map[i] == NULL)
+        return (INVALID);
+    return (VALID);
+}
+
 //goes through a file to check all lines;
 int read_map(char *file)
 {
-    int fd;
-    char *str;
+    int     fd;
+    char    *str;
 
     fd = open(file, O_RDONLY);
     if (fd < 0)
@@ -62,15 +106,14 @@ int read_map(char *file)
             free(str);
             return (err("bad obj in file"));
         }
+        if (add_line(str) == INVALID)
+        {
+            free(str);
+            return (err("bad malloc in readmap"));
+        }
         free(str);
         str = get_next_line(fd);
     }
     close(fd);
-    return (VALID);
-}
-
-int check_map(t_map *m)
-{
-    (void)m;
     return (VALID);
 }

@@ -1,5 +1,6 @@
 #include "../../include/cub3d.h"
 
+//initializes the data strure
 int  init_data(void)
 {
     t_data *data;
