@@ -25,12 +25,17 @@ int     read_map(char *file);
 int     parsing(int argc, char **argv);
 
 //init
+int     init_data(void);
 
 //exec/errors
 int     err(char *str);
 void    *err_null(char *str);
 
+//free
+int     free_data(t_data *data);
 
+//main
+t_data  *get_data(void);
 int     main(int argc, char **argv);
 
 #endif

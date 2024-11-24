@@ -2,17 +2,19 @@
 
 t_data  *get_data(void)
 {
-    static t_data *data;
+    static t_data data;
 
-    return (data);
+    return (&data);
 }
 
 int main(int argc, char **argv)
 {
-    t_data  data;
-
-    (void)data;
+    init_data();
     if (parsing(argc, argv) == INVALID)
-        return (printf("bad parsing"));
+    {
+        free_data(get_data());
+        return (err("bad parsing"));
+    }
+    free_data(get_data());
     return (VALID);
 }
