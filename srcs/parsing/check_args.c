@@ -53,9 +53,9 @@ int add_space_brutmap(t_data *data)
     int     i;
 
     size = 0;
-    if (data->brut_map)
+    if (data->map->brut_map)
     {
-        while (data->brut_map[size])
+        while (data->map->brut_map[size])
             size++;
     }
     new_map = malloc((size + 2) * sizeof(char *));
@@ -64,14 +64,14 @@ int add_space_brutmap(t_data *data)
     i = 0;
     while (i < size)
     {
-        new_map[i] = data->brut_map[i];
+        new_map[i] = data->map->brut_map[i];
         i++;
     }
     new_map[size] = NULL;
     new_map[size + 1] = NULL;
-    if (data->brut_map)
-        free(data->brut_map);
-    data->brut_map = new_map;
+    if (data->map->brut_map)
+        free(data->map->brut_map);
+    data->map->brut_map = new_map;
     return (size);
 }
 
@@ -83,8 +83,8 @@ int add_line(char *src)
 
     data = get_data();
     i = add_space_brutmap(data);
-    data->brut_map[i] = ft_strdup(src);
-    if (data->brut_map[i] == NULL)
+    data->map->brut_map[i] = ft_strdup(src);
+    if (data->map->brut_map[i] == NULL)
         return (INVALID);
     return (VALID);
 }
