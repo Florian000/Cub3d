@@ -86,6 +86,9 @@ int add_line(char *src)
     data->map->brut_map[i] = ft_strdup(src);
     if (data->map->brut_map[i] == NULL)
         return (INVALID);
+    data->map->hight++;
+    if (data->map->length < ft_strlen2(src))
+        data->map->length = ft_strlen2(src);
     return (VALID);
 }
 

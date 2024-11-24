@@ -25,6 +25,7 @@ int     read_map(char *file);
 int     parsing(int argc, char **argv);
 
 //init
+int init_map(t_data *data);
 int     init_data(void);
 
 //exec/errors

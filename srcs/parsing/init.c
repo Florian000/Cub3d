@@ -1,5 +1,6 @@
 #include "../../include/cub3d.h"
 
+//extention of init_data
 int init_map(t_data *data)
 {
     t_map *map;
