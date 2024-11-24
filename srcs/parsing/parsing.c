@@ -1,5 +1,6 @@
 #include "../../include/cub3d.h"
 
+//goes through all parsing events
 int parsing(int argc, char **argv)
 {
     if (check_arguments(argc, argv) == INVALID)

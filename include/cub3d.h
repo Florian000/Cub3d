@@ -19,12 +19,12 @@
 //parsing
 //check_args
 int     check_arguments(int argc, char **argv);
+int     read_map(char *file);
 
 //parsing
 int     parsing(int argc, char **argv);
 
 //init
-int read_map(char *file);
 
 //exec/errors
 int     err(char *str);
