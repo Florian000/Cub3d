@@ -9,6 +9,7 @@ int init_map(t_data *data)
     map->hight = 0;
     map->length = 0;
     map->brut_map = NULL;
+    map->real_map = NULL;
     return (VALID);
 }
 

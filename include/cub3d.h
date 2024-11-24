@@ -12,6 +12,12 @@
 #define VALID 0
 #define INVALID 1
 
+#define N       78
+#define S       83
+#define E       69
+#define W       87
+#define EMPTY   -1
+
 #define ERR_PARSING 20
 #define ERR_LIBX    30
 #define ERR_MALLOC  40
@@ -23,6 +29,11 @@ int     read_map(char *file);
 
 //parsing
 int     parsing(int argc, char **argv);
+
+//real_map
+int init_real_map(void);
+int fill_real_map(void);
+
 
 //init
 int init_map(t_data *data);
@@ -42,6 +53,7 @@ int     free_data(t_data *data);
 
 //debug
 void    print_brut_map(void);
+void    print_real_map(void);
 
 //main
 t_data  *get_data(void);

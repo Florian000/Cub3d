@@ -17,6 +17,7 @@ int main(int argc, char **argv)
         return (err("bad parsing"));
     }
     print_brut_map();
+    print_real_map();
     free_data(get_data());
     return (VALID);
 }

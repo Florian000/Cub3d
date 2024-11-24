@@ -1,5 +1,15 @@
 #include "../../include/cub3d.h"
 
+int free_map(t_data *data)
+{
+    if (data->map->real_map)
+    {
+        if (data->map->hight > 0 && data->map->length > 0)
+            free(data->map->real_map); // incomplete !! do nto use
+    }
+    return (INVALID);
+}
+
 //empties the data structure
 int free_data(t_data *data)
 {

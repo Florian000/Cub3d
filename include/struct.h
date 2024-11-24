@@ -3,6 +3,7 @@ typedef struct s_map
     int     hight;
     int     length;
     char    **brut_map;
+    int     **real_map;
 }   t_map;
 
 typedef struct s_data
