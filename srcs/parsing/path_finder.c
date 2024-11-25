@@ -9,36 +9,27 @@ int is_within_bounds(int x, int y, int width, int height)
 //flood check from the player/location
 int flood_fill_check(int **map, int height, int length, int x, int y, int **visited)
 {
-    if (!is_within_bounds(x, y, length, height)) {
-        return INVALID; // Out of bounds (player cannot escape this way)
-    }
-    if (visited[y][x]) {
-        return VALID; // Already visited, no need to check further
-    }
-    if (map[y][x] == 1 || map[y][x] == -1) {
-        return VALID; // Hit a wall
-    }
+    int up;
+    int down;
+    int left;
+    int right;
 
-    // If we reach an edge of the map through an open path, escape is possible
-    if ((x == 0 || x == length - 1 || y == 0 || y == height - 1) && map[y][x] == 0) {
-        return INVALID; // Player can escape
-    }
-
-    // Mark this cell as visited
+    if (!is_within_bounds(x, y, length, height))
+        return (INVALID);
+    if (visited[y][x])
+        return (VALID);
+    if (map[y][x] == 1 || map[y][x] == -1)
+        return (VALID);
+    if ((x == 0 || x == length - 1 || y == 0 || y == height - 1) && map[y][x] == 0)
+        return (INVALID);
     visited[y][x] = 1;
-
-    // Recursively check all neighboring cells
-    int up = flood_fill_check(map, height, length, x, y - 1, visited);
-    int down = flood_fill_check(map, height, length, x, y + 1, visited);
-    int left = flood_fill_check(map, height, length, x - 1, y, visited);
-    int right = flood_fill_check(map, height, length, x + 1, y, visited);
-
-    // If any direction leads to an escape, return INVALID
-    if (up == INVALID || down == INVALID || left == INVALID || right == INVALID) {
-        return INVALID;
-    }
-
-    return VALID;
+    up = flood_fill_check(map, height, length, x, y - 1, visited);
+    down = flood_fill_check(map, height, length, x, y + 1, visited);
+    left = flood_fill_check(map, height, length, x - 1, y, visited);
+    right = flood_fill_check(map, height, length, x + 1, y, visited);
+    if (up == INVALID || down == INVALID || left == INVALID || right == INVALID)
+        return (INVALID);
+    return (VALID);
 }
 
 
