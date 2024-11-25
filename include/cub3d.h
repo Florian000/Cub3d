@@ -31,9 +31,11 @@ int     read_map(char *file);
 int     parsing(int argc, char **argv);
 
 //real_map
-int init_real_map(void);
-int fill_real_map(void);
+int     init_real_map(void);
+int     fill_real_map(void);
 
+//path_finder
+int     validate_map(t_map *map);
 
 //init
 int init_map(t_data *data);
