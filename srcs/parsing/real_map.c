@@ -42,12 +42,12 @@ int fill_real_map(void)
             if (map->brut_map[i] && map->brut_map[i][j])
             {
                 if (ft_isspace(map->brut_map[i][j]) == 1)
-                    map->real_map[i][j] = EMPTY;
+                    map->real_map[i][j] = 0;
                 else
                     map->real_map[i][j] = map->brut_map[i][j] - 48;
             }
             else
-                map->real_map[i][j] = EMPTY;
+                map->real_map[i][j] = 0;
             j++;
         }
         i++;
