@@ -54,25 +54,20 @@ int free_data(t_data *data)
 {
     if (!data)
         return (INVALID);
-
     if (data->map)
     {
-        free_map(data);  // Free the map first
+        free_map(data);
         if (data->map->brut_map)
-            ft_free(VALID, "s", data->map->brut_map); // Ensure no double free
+            ft_free(VALID, "s", data->map->brut_map);
         free(data->map);
     }
-
     if (data->gd_args)
         free(data->gd_args);
     if (data->C)
         free(data->C);
-
     if (data->F)
         free(data->F);
-    
     if (data->textures)
-        free_textures(data); // Free textures
-
+        free_textures(data);
     return (VALID);
 }

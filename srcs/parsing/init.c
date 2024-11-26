@@ -16,11 +16,9 @@ int init_c(t_data *data)
 {
     if (!data)
         return (INVALID);
-
     t_color *c = malloc(sizeof(t_color));
     if (!c)
-        return (INVALID); // malloc failed
-
+        return (INVALID);
     c->B = -1;
     c->G = -1;
     c->R = -1;
@@ -35,8 +33,7 @@ int init_f(t_data *data)
 
     t_color *c = malloc(sizeof(t_color));
     if (!c)
-        return (INVALID); // malloc failed
-
+        return (INVALID);
     c->B = -1;
     c->G = -1;
     c->R = -1;
@@ -65,25 +62,18 @@ int init_data(void)
     t_data *data = get_data();
     if (!data)
         return (INVALID);
-
-    // Clear the memory for t_data structure
     ft_bzero(data, sizeof(t_data));
-
-    // Allocate memory for the map
     data->map = malloc(sizeof(t_map));
     if (!data->map)
-        return (INVALID); // malloc failed
-
+        return (INVALID);
     if (init_map(data) == INVALID ||
         init_c(data) == INVALID ||
         init_f(data) == INVALID ||
         init_texture(data) == INVALID)
     {
-        free_data(data); // Cleanup in case of failure
+        free_data(data);
         return (INVALID);
     }
-
-    // Initialize remaining fields
     data->gd_args = NULL;
 
     return (VALID);
