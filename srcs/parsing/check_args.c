@@ -102,6 +102,11 @@ int read_map(char *file)
     if (fd < 0)
         return (err("could not open fd"));
     str = get_next_line(fd);
+    while (str && check_first_args(str) == VALID)
+    {
+        free(str);
+        str = get_next_line(fd);
+    }
     while (str)
     {
         if (check_line(str) == INVALID)

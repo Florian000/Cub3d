@@ -26,6 +26,7 @@
 //check_args
 int     check_arguments(int argc, char **argv);
 int     read_map(char *file);
+int     check_first_args(char *str);
 
 //parsing
 int     parsing(int argc, char **argv);
