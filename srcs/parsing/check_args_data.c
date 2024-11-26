@@ -15,9 +15,35 @@ int check_first_args(char *str)
     return (INVALID);
 }
 
+int add_texture_to_data(char **tab)
+{
+    t_textures *t;
+
+    t = get_data()->textures;
+    if (ft_strncmp(tab[0], "NO", 3) == VALID)
+        t->NO = ft_strdup(tab[1]);
+    if (ft_strncmp(tab[0], "SO", 3) == VALID)
+        t->SO = ft_strdup(tab[1]);
+    if (ft_strncmp(tab[0], "WE", 3) == VALID)
+        t->WE = ft_strdup(tab[1]);
+    if (ft_strncmp(tab[0], "EA", 3) == VALID)
+        t->EA = ft_strdup(tab[1]);
+    return (VALID);
+}
+
 int add_texture(char *str)
 {
-    return (VALID);
+    char **tab;
+
+    tab = ft_split(str, ' ');
+    if (!tab)
+        return (INVALID);
+    if (tab[0] && tab[1] && !tab[2])
+    {
+        add_texture_to_data(tab);
+        return (ft_free(VALID, "s", tab));
+    }
+    return (ft_free(INVALID, "s", tab));
 }
 
 int check_color(char **nb)
