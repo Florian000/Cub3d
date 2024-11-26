@@ -1,23 +1,26 @@
 #include "../../include/cub3d.h"
 
-//extention of init_data
 int init_map(t_data *data)
 {
-    t_map *map;
+    if (!data || !data->map)
+        return (INVALID);
 
-    map = data->map;
-    map->hight = 0;
-    map->length = 0;
-    map->brut_map = NULL;
-    map->real_map = NULL;
+    data->map->hight = 0;
+    data->map->length = 0;
+    data->map->brut_map = NULL;
+    data->map->real_map = NULL;
     return (VALID);
 }
 
 int init_c(t_data *data)
 {
-    t_color *c;
+    if (!data)
+        return (INVALID);
 
-    c = malloc(sizeof(t_color));
+    t_color *c = malloc(sizeof(t_color));
+    if (!c)
+        return (INVALID); // malloc failed
+
     c->B = -1;
     c->G = -1;
     c->R = -1;
@@ -27,9 +30,13 @@ int init_c(t_data *data)
 
 int init_f(t_data *data)
 {
-    t_color *c;
+    if (!data)
+        return (INVALID);
 
-    c = malloc(sizeof(t_color));
+    t_color *c = malloc(sizeof(t_color));
+    if (!c)
+        return (INVALID); // malloc failed
+
     c->B = -1;
     c->G = -1;
     c->R = -1;
@@ -39,9 +46,12 @@ int init_f(t_data *data)
 
 int init_texture(t_data *data)
 {
-    t_textures *t;
+    if (!data)
+        return (INVALID);
 
-    t = malloc(sizeof(t_textures));
+    t_textures *t = malloc(sizeof(t_textures));
+    if (!t)
+        return (INVALID);
     t->EA = NULL;
     t->NO = NULL;
     t->SO = NULL;
@@ -50,17 +60,31 @@ int init_texture(t_data *data)
     return (VALID);
 }
 
-int  init_data(void)
+int init_data(void)
 {
-    t_data *data;
+    t_data *data = get_data();
+    if (!data)
+        return (INVALID);
 
-    data = get_data();
+    // Clear the memory for t_data structure
     ft_bzero(data, sizeof(t_data));
+
+    // Allocate memory for the map
     data->map = malloc(sizeof(t_map));
-    init_map(data);
+    if (!data->map)
+        return (INVALID); // malloc failed
+
+    if (init_map(data) == INVALID ||
+        init_c(data) == INVALID ||
+        init_f(data) == INVALID ||
+        init_texture(data) == INVALID)
+    {
+        free_data(data); // Cleanup in case of failure
+        return (INVALID);
+    }
+
+    // Initialize remaining fields
     data->gd_args = NULL;
-    init_c(data);
-    init_f(data);
-    init_texture(data);
+
     return (VALID);
 }

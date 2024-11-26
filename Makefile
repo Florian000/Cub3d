@@ -1,6 +1,6 @@
 # Variables
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fPIE
+CFLAGS = 
 NAME = cub3d
 SRCDIR = srcs
 OBJDIR = objs

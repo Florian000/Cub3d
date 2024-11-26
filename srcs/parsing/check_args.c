@@ -36,7 +36,7 @@ int check_line(char *str)
         else
         {
             if (str[i] == '0' || str[i] == '1' || str[i] == 'N' || str[i] == 'S'
-                || str[i] == 'E' || str[i] == 'O')
+                || str[i] == 'E' || str[i] == 'W')
                 i++;
             else
                 return (INVALID);
