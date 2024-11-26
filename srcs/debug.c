@@ -27,7 +27,7 @@ void    print_brut_map(void)
     printf("WE : %s\n\n", data->textures->WE);
 
     while (data->map->brut_map[i])
-        printf("%s", data->map->brut_map[i++]);
+        printf("%s\n", data->map->brut_map[i++]);
     printf("\n\n");
 }
 

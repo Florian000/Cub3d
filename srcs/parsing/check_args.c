@@ -102,12 +102,14 @@ int read_map(char *file)
     if (fd < 0)
         return (err("could not open fd"));
     str = get_next_line(fd);
+    str = ft_strtrim(str, "\n");
     while (str && check_first_args(str) == VALID)
     {
         if (add_first_args(str) == INVALID)
             break ;
         free(str);
         str = get_next_line(fd);
+        str = ft_strtrim(str, "\n");
     }
     while (str)
     {
@@ -123,6 +125,7 @@ int read_map(char *file)
         }
         free(str);
         str = get_next_line(fd);
+        str = ft_strtrim(str, "\n");
     }
     close(fd);
     return (VALID);
