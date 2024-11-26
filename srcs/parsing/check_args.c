@@ -104,6 +104,8 @@ int read_map(char *file)
     str = get_next_line(fd);
     while (str && check_first_args(str) == VALID)
     {
+        if (add_first_args(str) == INVALID)
+            break ;
         free(str);
         str = get_next_line(fd);
     }

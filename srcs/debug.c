@@ -8,9 +8,21 @@ void    print_brut_map(void)
     data = get_data();
     i = 0;
     printf("hight : %d\n", data->map->hight);
-    printf("length : %d\n", data->map->length);
+    printf("length : %d\n\n", data->map->length);
+
+    printf("F : \n");
+    printf("R : %d\n", data->F->R);
+    printf("G : %d\n", data->F->G);
+    printf("B : %d\n\n", data->F->B);
+
+    printf("C : \n");
+    printf("R : %d\n", data->C->R);
+    printf("G : %d\n", data->C->G);
+    printf("B : %d\n\n", data->C->B);
+
     while (data->map->brut_map[i])
         printf("%s", data->map->brut_map[i++]);
+    printf("\n\n");
 }
 
 void    print_real_map(void)
