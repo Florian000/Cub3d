@@ -10,14 +10,15 @@ t_data  *get_data(void)
 
 int main(int argc, char **argv)
 {
-    init_data();
-    if (parsing(argc, argv) == INVALID)
-    {
-        free_data(get_data());
-        return (err("bad parsing"));
-    }
-    print_brut_map();
-    print_real_map();
-    free_data(get_data());
-    return (VALID);
+    launcher();
+    // init_data();
+    // if (parsing(argc, argv) == INVALID)
+    // {
+    //     free_data(get_data());
+    //     return (err("bad parsing"));
+    // }
+    // print_brut_map();
+    // print_real_map();
+    // free_data(get_data());
+    // return (VALID);
 }

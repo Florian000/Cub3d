@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#include "minilibx-linux/mlx.h"
 #include "libft/libft.h"
 #include "struct.h"
 
@@ -22,6 +22,9 @@
 #define ERR_LIBX    30
 #define ERR_MALLOC  40
 
+#define SCREEN_WIDTH 1000
+#define SCREEN_HEIGHT 1000
+#define WIN_NAME "CUB3D"
 //parsing
 //check_args
 int     check_arguments(int argc, char **argv);
@@ -50,11 +53,6 @@ void    *err_null(char *str);
 //free
 int     free_data(t_data *data);
 
-
-
-
-
-
 //debug
 void    print_brut_map(void);
 void    print_real_map(void);
@@ -62,5 +60,8 @@ void    print_real_map(void);
 //main
 t_data  *get_data(void);
 int     main(int argc, char **argv);
+
+//Display_window
+int		launcher(void);
 
 #endif

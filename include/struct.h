@@ -30,3 +30,27 @@ typedef struct s_data
     t_color     *F;
 }   t_data;
 
+typedef struct s_player
+{
+    int pos_x;
+    int pos_y;
+    double angle;
+    float rd;
+} t_player;
+
+typedef struct s_ray
+{
+    double ray_ngl;
+    double distance;
+    int  flag;
+} t_ray;
+
+typedef struct s_game
+{
+    void  *mlx_img;
+    void  *mlx_p;
+    void  *mlx_win;
+    t_ray   *ray; 
+    t_data   *dt;
+    t_player  *play;
+} t_game;
