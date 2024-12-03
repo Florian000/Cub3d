@@ -29,7 +29,7 @@
 #define HEIGHT 1000
 #define WIN_NAME "CUB3D"
 #define TILE_SIZE 30
-#define FOV 60
+#define FOV 1
 #define ROTATION_SPEED 0.2
 #define PLAYER_SPEED 8
 
