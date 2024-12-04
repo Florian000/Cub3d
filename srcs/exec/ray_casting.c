@@ -39,7 +39,7 @@ int	wall_hit(float x, float y, t_data *cub)
 	{
 		if(cub->map->brut_map[y_m][x_m] == '0')
         	return (1);
-		printf("wall : %c - x = %f, y= %f, x_m = %d, y_m = %d", cub->map->brut_map[y_m][x_m], x, y,x_m, y_m);
+		printf("wall : %c - x = %d, y= %d px = %f py = %f", cub->map->brut_map[y_m][x_m], x_m, y_m, x, y);
 	}
     return (0);
 }
@@ -72,26 +72,28 @@ float get_h_inter(t_data *cub, float angl)
 	if (angl >= M_PI)
 	{
 		y_step *= -1;
-		adjust = -1;
-		h_y = cub->game->play->pos_y - (cub->game->play->pos_y - floor(cub->game->play->pos_y / TILE_SIZE) * TILE_SIZE);
+		adjust = 1;
+		h_y = floor(cub->game->play->pos_y / TILE_SIZE) * TILE_SIZE;
 	}
 	else
 	{
-		h_y = cub->game->play->pos_y + (cub->game->play->pos_y -floor(cub->game->play->pos_y / TILE_SIZE) * TILE_SIZE);
-		adjust = 1;
+		h_y = floor(cub->game->play->pos_y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
+		adjust = -1;
 	}
 	x_step = TILE_SIZE / tan(angl);
-	h_x = cub->game->play->pos_x - ((cub->game->play->pos_y -floor(cub->game->play->pos_y / TILE_SIZE) * TILE_SIZE) / tan(angl));
-	if (angl >= M_PI_2 && angl <= M_PI_2 * 3 && x_step > 0)
+	h_x = cub->game->play->pos_x + fabs((h_y - cub->game->play->pos_y) / tan(angl));
+	if (angl >= M_PI_2 && angl <= M_PI_2 * 3)
 	{
-		x_step *= -1;
-		h_x = cub->game->play->pos_x - ((cub->game->play->pos_y -floor(cub->game->play->pos_y / TILE_SIZE) * TILE_SIZE) / tan(angl));
+		if (x_step > 0)
+			x_step *= -1;
+		h_x = cub->game->play->pos_x - fabs((h_y - cub->game->play->pos_y) / tan(angl));
 	}
 	else if (x_step < 0)
-		x_step *= -1;
-	
-	printf("\n H : ");
-	while (wall_hit(h_x, h_y + adjust, cub))
+		x_step *= - 1;
+
+	//printf("--HY= %f, hX = %f, x_step = %f y_step = %f  -- ",h_y, h_x, x_step, y_step);
+	//printf(" - H : ");
+	while (wall_hit(h_x, h_y - adjust, cub))
 	{
 			h_x += x_step;
 			h_y += y_step;
@@ -114,23 +116,28 @@ float get_v_inter(t_data *cub, float angl)
 	{
 		x_step *= -1;
 		adjust = -1;
-		v_x = cub->game->play->pos_x - (cub->game->play->pos_x -floor(cub->game->play->pos_x / TILE_SIZE) * TILE_SIZE);
+		v_x = floor(cub->game->play->pos_x / TILE_SIZE) * TILE_SIZE;
 	}
 	else
 	{
-		v_x = cub->game->play->pos_x + (cub->game->play->pos_x -floor(cub->game->play->pos_x / TILE_SIZE) * TILE_SIZE);
+		v_x = floor(cub->game->play->pos_x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
 		adjust = 1;
 	}
 	y_step = TILE_SIZE * tan(angl);
 	
-	v_y = cub->game->play->pos_y + ((cub->game->play->pos_x -floor(cub->game->play->pos_x / TILE_SIZE) * TILE_SIZE) / tan(angl));
-	if (angl >= M_PI && y_step > 0)
+	v_y = cub->game->play->pos_y + fabs(((v_x - cub->game->play->pos_x) * tan(angl)));
+	if (angl >= M_PI)
 	{
-		y_step *= -1;
-		v_y = cub->game->play->pos_y - ((cub->game->play->pos_x - floor(cub->game->play->pos_x / TILE_SIZE) * TILE_SIZE) / tan(angl));
+		if (y_step > 0)
+			y_step *= -1;
+		v_y = cub->game->play->pos_y - fabs(((v_x - cub->game->play->pos_x) * tan(angl)));
 	}
-	//printf("--vY= %f, vX = %f, x_step = %f y_step = %f  --",v_y, v_x, x_step, y_step);
-	printf("\n V : ");
+	else if (y_step < 0)
+		y_step *= -1;
+	else if(v_y < 0)
+		v_y *= -1;
+	printf("--vY= %f, vX = %f, x_step = %f y_step = %f  --",v_y, v_x, x_step, y_step);
+	//printf(" - V : ");
 	while (wall_hit(v_x + adjust, v_y, cub))
 	{
 			v_x += x_step;
@@ -146,8 +153,8 @@ void cast_rays(t_data *cub)
     int ray;
 
 	ray = 0;
-	printf("pos x = %d, pos y = %d angle = %f\n", cub->game->play->pos_x,cub->game->play->pos_y, cub->game->play->angle);
 	cub->game->ray->ray_ngl = nor_angle(cub->game->play->angle - (cub->game->play->fov / 2));
+	printf("pos x = %d, pos y = %d angle = %f\n", cub->game->play->pos_x,cub->game->play->pos_y, cub->game->play->angle);
 	while (ray < WIDTH)
 	{
 		cub->game->ray->horizontal = TRUE;
@@ -160,9 +167,10 @@ void cast_rays(t_data *cub)
 			cub->game->ray->distance = h_dist;
 			cub->game->ray->horizontal = FALSE;
 		}
-		//printf("--Ray %d with angle %f dist h : %f\n",ray,cub->game->ray->ray_ngl, cub->game->ray->distance);
+		printf("--Ray %d with angle %f hdist = %f, v_dist = %f\n",ray,cub->game->ray->ray_ngl, h_dist, v_dist);
 		render(cub, ray);
 		cub->game->ray->ray_ngl += (cub->game->play->fov / WIDTH);
+		cub->game->ray->ray_ngl = nor_angle(cub->game->ray->ray_ngl);
 		ray ++;
 	}
 }
