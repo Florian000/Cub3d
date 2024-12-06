@@ -7,7 +7,7 @@ void    print_brut_map(void)
 
     data = get_data();
     i = 0;
-    printf("hight : %d\n", data->map->hight);
+    printf("hight : %d\n", data->map->height);
     printf("length : %d\n\n", data->map->length);
 
     printf("F : \n");
@@ -39,7 +39,7 @@ void    print_real_map(void)
 
     i = 0;
     map = get_data()->map;
-    while (i < map->hight)
+    while (i < map->height)
     {
         j = 0;
         while (j < map->length)

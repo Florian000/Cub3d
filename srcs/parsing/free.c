@@ -7,7 +7,7 @@ int free_map(t_data *data)
     if (data->map && data->map->real_map)
     {
         i = 0;
-        while (i < data->map->hight)
+        while (i < data->map->height)
         {
             if (data->map->real_map[i])
                 free(data->map->real_map[i]);

@@ -6,11 +6,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "minilibx-linux/mlx.h"
-#include "libft/libft.h"
+#include "libft/includes/libft.h"
 #include "struct.h"
 #include <math.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
+#include <stdbool.h>
 
 #define VALID 0
 #define INVALID 1
@@ -25,27 +26,17 @@
 #define ERR_LIBX    30
 #define ERR_MALLOC  40
 
-#define WIDTH 1000
-#define HEIGHT 1000
+//GAME DEFINE
+#define WIDTH 2500
+#define HEIGHT 1200
 #define WIN_NAME "CUB3D"
-#define TILE_SIZE 30
-#define FOV 1
-#define ROTATION_SPEED 0.2
+#define TILE_SIZE 50
+#define FOV 2
+#define ROTATION_SPEED 0.02
 #define PLAYER_SPEED 8
 
-#define TRUE 1
-#define FALSE 0
-
-typedef enum e_direction
-{
-	RIGHT,
-	LEFT,
-	UP,
-	DOWN
-}	t_direction;
-
 //parsing
-//check_args
+//check_argsg
 int     check_arguments(int argc, char **argv);
 int     read_map(char *file);
 int     check_first_args(char *str);
@@ -70,12 +61,14 @@ int     err(char *str);
 void    *err_null(char *str);
 
 //Startgame
-int		launcher(t_data *cub);
+int		launcher(t_game *game);
 void init_game(t_data *cub); // provisoire
 
 //RAYCATING
 
-void cast_rays(t_data *cub);
+void cast_rays(t_ray *ray, t_player *player);
+float h_inter(t_player *p, t_ray *ray, float angle);
+float v_inter(t_player *p, t_ray *ray, float angle);
 float nor_angle(float angle);
 
 //Rendering functions
@@ -84,10 +77,9 @@ void render(t_data *cub, int ray);
 
 //key management
 int exit_game(t_game *game);
-int key_management(t_data *cub);
-void key_press(int key, t_data *cub);
-void	key_release(int key, t_data *cub);
-void	hook(t_data *cub);
+void key_press(int key, t_player *player);
+void	key_release(int key, t_player *player);
+void	hook(t_game *g);
 
 //free
 int     free_data(t_data *data);

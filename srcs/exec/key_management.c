@@ -1,69 +1,100 @@
 #include "../../include/cub3d.h"
 
-void	key_release(int key, t_data *cub)
+void	key_release(int key, t_player *player)
 {
-	ft_putstr_fd("released\n", 1);
 	if (key == XK_D || key == XK_d)
-		cub->game->play->x_way = 0;
+		player->x_way = 0;
 	else if (key == XK_A || key == XK_a)
-		cub->game->play->x_way = 0;
+		player->x_way = 0;
 	else if (key == XK_S || key == XK_s)
-		cub->game->play->y_way = 0;
+		player->y_way = 0;
 	else if (key == XK_W || key == XK_w)
-		cub->game->play->y_way = 0;
+		player->y_way = 0;
 	else if (key == XK_Left)
-		cub->game->play->rotate = 0;
+		player->rotate = 0;
 	else if (key == XK_Right)
-		cub->game->play->rotate = 0;
+		player->rotate = 0;
 }
 
-void key_press(int key, t_data *cub)
+void key_press(int key, t_player *player)
 {
-	ft_putstr_fd("pressed\n", 1);
 	if (key == XK_Escape)
-		exit(0);
+		exit_game(player->cub->game);
 	else if (key == XK_A || key == XK_a)
-		cub->game->play->x_way = -1;
+		player->x_way = -1;
 	else if (key == XK_D || key == XK_d)
-		cub->game->play->x_way = 1;
+		player->x_way = 1;
 	else if (key == XK_S || key == XK_s)
-		cub->game->play->y_way = -1;
+		player->y_way = -1;
 	else if (key == XK_W || key == XK_w)
-		cub->game->play->y_way = 1;
+		player->y_way = 1;
 	else if (key == XK_Left)
-		cub->game->play->rotate = -1;
+		player->rotate = -1;
 	else if (key == XK_Right)
-		cub->game->play->rotate = 1;
+		player->rotate = 1;
 }
 
-void	hook(t_data *cub)	// hook the player
+void check_hits(t_player *player, double x, double y, t_map *map)
 {
-	if (cub->game->play->rotate == 1)
-		cub->game->play->angle += ROTATION_SPEED;
-	if (cub->game->play->rotate == -1)
-		cub->game->play->angle -= ROTATION_SPEED;
-	if (cub->game->play->x_way == 1)
-		cub->game->play->pos_x += PLAYER_SPEED;
-	if (cub->game->play->x_way == -1)
-		cub->game->play->pos_x -= PLAYER_SPEED;
-	if (cub->game->play->y_way == 1)
-		cub->game->play->pos_y += PLAYER_SPEED;
-	if (cub->game->play->y_way == -1)
-		cub->game->play->pos_y -= PLAYER_SPEED;
-	if (cub->game->play->y_way != 0 || cub->game->play->rotate != 0 || cub->game->play->x_way != 0)
+	int new_x;
+	int new_y;
+
+	new_x = floor((player->pos_x + x) / TILE_SIZE);
+	new_y = floor((player->pos_y + y) / TILE_SIZE);
+	if(map->brut_map[new_y][new_x] == '0')
 	{
-		ft_putstr_fd("X = ", 1);
-		ft_putnbr_fd(cub->game->play->pos_y, 1);
-		ft_putstr_fd("\nY = ", 1);
-		ft_putnbr_fd(cub->game->play->pos_x, 1);
-		ft_putstr_fd("\n---\n", 1);
-		cast_rays(cub);
-		mlx_put_image_to_window(cub->game->mlx_p, cub->game->mlx_win ,cub->game->mlx_img, 0, 0);
+		player->pos_x += x;
+		player->pos_y += y;
+	}
+
+}
+
+void	move_player(t_player *player)
+{
+	double move_x;
+	double move_y;
+
+	if (player->x_way == 1)
+	{
+		move_x = -sin(player->angle) * PLAYER_SPEED;
+		move_y = cos(player->angle) * PLAYER_SPEED;
+
+	}
+	if (player->x_way == -1)
+	{
+		move_x = sin(player->angle) * PLAYER_SPEED;
+		move_y = -cos(player->angle) * PLAYER_SPEED;
+	}
+	if (player->y_way == 1)
+	{
+		move_x = cos(player->angle) * PLAYER_SPEED;
+		move_y = sin(player->angle) * PLAYER_SPEED;
+	}
+	if (player->y_way == -1)
+	{
+		move_x = -cos(player->angle) * PLAYER_SPEED;
+		move_y = -sin(player->angle) * PLAYER_SPEED;
+	}
+	check_hits(player, move_x, move_y, player->cub->map);
+}
+
+void	hook(t_game *g)
+{
+	if (g->player->rotate == 1)
+		g->player->angle = nor_angle(g->player->angle + ROTATION_SPEED);
+	if (g->player->rotate == -1)
+		g->player->angle = nor_angle(g->player->angle - ROTATION_SPEED);
+	if (g->player->y_way != 0 || g->player->x_way != 0 )
+		move_player(g->player);
+	if (g->player->y_way != 0 || g->player->rotate != 0 || g->player->x_way != 0)
+	{
+		cast_rays(g->ray, g->player);
+		mlx_put_image_to_window(g->mlx_p, g->mlx_win ,g->mlx_img, 0, 0);
 	}
 }
 
 int exit_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx_p, game->mlx_win);
-	return 0;
+	return (EXIT_SUCCESS);
 }

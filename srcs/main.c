@@ -18,7 +18,8 @@ int main(int argc, char **argv)
     // }
     //print_brut_map();
     //print_real_map();
-    launcher(get_data());
+    init_game(get_data());
+    launcher(get_data()->game);
     free_data(get_data());
     return (VALID);
 }

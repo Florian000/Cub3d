@@ -3,55 +3,96 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jvittoz <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/06 00:04:39 by jvittoz           #+#    #+#              #
-#    Updated: 2024/10/03 21:04:35 by jvittoz          ###   ########.fr        #
+#    Created: 2022/11/12 16:09:48 by fgranger          #+#    #+#              #
+#    Updated: 2024/12/06 20:08:55 by fgranger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compiler and flags
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -fPIE
+NAME		=	libft.a
 
-# Name of the library
-NAME = libft.a
+DIR_GNL	=	srcs/ft_gnl/
+DIR_IS	=	srcs/ft_is/
+DIR_LST	=	srcs/ft_lst/
+DIR_MEM	=	srcs/ft_mem/
+DIR_PRINTF =	srcs/ft_printf/
+DIR_PUT	=	srcs/ft_put/
+DIR_STR	=	srcs/ft_str/
+DIR_TO	=	srcs/ft_to/
 
-# Source and object files
-SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
-	  ft_isascii.c ft_isdigit.c ft_memchr.c ft_isalpha.c \
-	  ft_memcmp.c ft_memcpy.c ft_strchr.c ft_memset.c \
-	  ft_memmove.c ft_strdup.c ft_strlcat.c ft_strlen2.c \
-	  ft_strlcpy.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
-	  ft_tolower.c ft_toupper.c ft_itoa.c ft_putchar_fd.c \
-	  ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-	  ft_strjoin.c ft_strmapi.c ft_striteri.c ft_substr.c \
-	  ft_space_split.c ft_free.c ft_dl_clear.c ft_dl_del.c \
-	  ft_dl_new.c ft_dl_add_back.c ft_dl_size.c ft_strtrim.c \
-	  ft_dl_last.c ft_split.c ft_dl_remove_from.c \
-	  get_next_line.c get_next_line_utils.c
-OBJ = $(SRC:.c=.o)
+SRCS 		=		$(DIR_TO)ft_atoi.c \
+				$(DIR_TO)ft_itoa.c \
+				$(DIR_TO)ft_tolower.c \
+				$(DIR_TO)ft_toupper.c \
+				$(DIR_STR)ft_split.c \
+				$(DIR_STR)ft_strchr.c \
+				$(DIR_STR)ft_strdup.c \
+				$(DIR_STR)ft_striteri.c \
+				$(DIR_STR)ft_strjoin.c \
+				$(DIR_STR)ft_strlcat.c \
+				$(DIR_STR)ft_strlcpy.c \
+				$(DIR_STR)ft_strlen.c \
+				$(DIR_STR)ft_strmapi.c \
+				$(DIR_STR)ft_strncmp.c \
+				$(DIR_STR)ft_strnstr.c \
+				$(DIR_STR)ft_strrchr.c \
+				$(DIR_STR)ft_strtrim.c \
+				$(DIR_STR)ft_substr.c \
+				$(DIR_PUT)ft_putchar_fd.c \
+				$(DIR_PUT)ft_putendl_fd.c \
+				$(DIR_PUT)ft_putnbr_fd.c \
+				$(DIR_PUT)ft_putstr_fd.c \
+				$(DIR_PRINTF)ft_printf.c \
+				$(DIR_PRINTF)ft_conversions.c \
+				$(DIR_PRINTF)ft_conversions2.c \
+				$(DIR_PRINTF)ft_put_with_printedcount.c \
+				$(DIR_MEM)ft_bzero.c \
+				$(DIR_MEM)ft_calloc.c \
+				$(DIR_MEM)ft_memchr.c \
+				$(DIR_MEM)ft_memcmp.c \
+				$(DIR_MEM)ft_memcpy.c \
+				$(DIR_MEM)ft_memmove.c \
+				$(DIR_MEM)ft_memset.c \
+				$(DIR_IS)ft_isalnum.c \
+				$(DIR_IS)ft_isalpha.c \
+				$(DIR_IS)ft_isascii.c \
+				$(DIR_IS)ft_isdigit.c \
+				$(DIR_IS)ft_isprint.c \
+				$(DIR_IS)ft_isspace.c \
+				$(DIR_LST)ft_lstadd_back.c \
+				$(DIR_LST)ft_lstadd_front.c \
+				$(DIR_LST)ft_lstclear.c \
+				$(DIR_LST)ft_lstdelone.c \
+				$(DIR_LST)ft_lstiter.c \
+				$(DIR_LST)ft_lstlast.c \
+				$(DIR_LST)ft_lstmap.c \
+				$(DIR_LST)ft_lstnew.c \
+				$(DIR_LST)ft_lstsize.c \
+				$(DIR_GNL)get_next_line.c \
+				$(DIR_GNL)get_next_line_utils.c \
+				
+OBJS		=	$(SRCS:.c=.o)
 
-# Default rule to build the library
-all: $(NAME)
+INCLUDES	=	-I includes
 
-# Rule to create the library archive
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
 
-# Rule to compile .c files into .o object files
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+.c.o :	
+			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# Clean up object files
+$(NAME):	$(OBJS)
+			ar -rcs $(NAME) $(OBJS)
+
+all:		$(NAME)
+
 clean:
-	rm -f $(OBJ)
+			rm -rf $(OBJS) $(OBJS_BONUS)
 
-# Clean up object files and the library
-fclean: clean
-	rm -f $(NAME)
+fclean:		clean
+			rm -rf $(NAME)
 
-# Rebuild everything
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY:		all clean fclean re

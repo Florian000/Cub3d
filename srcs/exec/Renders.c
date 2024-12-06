@@ -11,15 +11,6 @@ void my_mlx_pixel_put(t_data *cub, int x, int y, int color) // put the pixel
     	data[y * WIDTH + x] = color;
 }
 
-float nor_angle(float angle) // normalize the angle
-{
-	if (angle < 0)
-		angle += (2 * M_PI);
-	if (angle > (2 * M_PI))
-		angle -= (2 * M_PI);
-	return (angle);
-}
-
 void draw_floor_ceiling(t_data *cub, int ray, int t_pix, int b_pix) // draw the floor and the ceiling
 {
  int  i;
@@ -35,7 +26,7 @@ void draw_floor_ceiling(t_data *cub, int ray, int t_pix, int b_pix) // draw the 
 
 int get_color(t_data *cub, int flag)
 {
-	if (flag == TRUE)
+	if (flag == true)
 	{
 		if (cub->game->ray->ray_ngl > M_PI / 2 && cub->game->ray->ray_ngl < 3 * (M_PI / 2))
 			return (0XFFFFFF); // west wall
@@ -60,20 +51,20 @@ void draw_wall(t_data *cub, int ray, int t_pix, int b_pix)
 		my_mlx_pixel_put(cub, ray, t_pix++, color);
 }
 
-void render(t_data *cub, int ray)
+void render(t_data *cub, int count_rays)
 {
 	double wall_h;
 	double b_pix;
 	double t_pix;
 
-	cub->game->ray->distance *= cos(cub->game->ray->ray_ngl - cub->game->play->angle); // fix the fisheye
-	wall_h = (TILE_SIZE / cub->game->ray->distance) * ((WIDTH / 2) / tan(cub->game->play->fov / 2)); // get the wall height
+	cub->game->ray->distance *= cos(cub->game->ray->ray_ngl - cub->game->player->angle); // fix the fisheye
+	wall_h = (TILE_SIZE / cub->game->ray->distance) * ((WIDTH / 2) / tan(cub->game->player->fov / 2)); // get the wall height
 	b_pix = (HEIGHT / 2) + (wall_h / 2);
 	t_pix = (HEIGHT / 2) - (wall_h / 2);
 	if (b_pix > HEIGHT)
 		b_pix = HEIGHT;
 	if (t_pix < 0)
 		t_pix = 0;
-	draw_wall(cub, ray, t_pix, b_pix);
-	draw_floor_ceiling(cub, ray, t_pix, b_pix);
+	draw_wall(cub, count_rays, t_pix, b_pix);
+	draw_floor_ceiling(cub, count_rays, t_pix, b_pix);
 }

@@ -5,7 +5,7 @@ int init_map(t_data *data)
     if (!data || !data->map)
         return (INVALID);
 
-    data->map->hight = 0;
+    data->map->height = 0;
     data->map->length = 0;
     data->map->brut_map = NULL;
     data->map->real_map = NULL;

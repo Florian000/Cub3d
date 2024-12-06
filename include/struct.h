@@ -1,6 +1,9 @@
+#include <stdbool.h>
+
+typedef struct s_data t_data;
 typedef struct s_map
 {
-    int     hight;
+    int     height;
     int     length;
     int     pos_x; //player position x axis
     int     pos_y; //player position y axis
@@ -32,13 +35,20 @@ typedef struct s_player
     int  rotate;
     int  x_way;
     int  y_way;
+    t_data *cub;
 } t_player;
 
 typedef struct s_ray
 {
     double ray_ngl;
     double distance;
-    int  horizontal;
+    bool  horizontal;
+    float x_step;
+    float y_step;
+    float x;
+    float y;
+    int adjust;
+    t_data *cub;
 } t_ray;
 
 typedef struct s_game
@@ -47,7 +57,8 @@ typedef struct s_game
     void  *mlx_p;
     void  *mlx_win;
     t_ray   *ray; 
-    t_player  *play;
+    t_player  *player;
+    t_data *cub;
 } t_game;
 
 typedef struct s_data

@@ -44,7 +44,7 @@ int validate_map(t_map *map)
     int j;
 
     i = 0;
-    while (i < map->hight)
+    while (i < map->height)
     {
         j = 0;
         while (j < map->length)
@@ -63,13 +63,13 @@ int validate_map(t_map *map)
     }
     if (player_x == -1 || player_y == -1)
         return err("No player in map");
-    visited = (int **)malloc(map->hight * sizeof(int *));
+    visited = (int **)malloc(map->height * sizeof(int *));
     i = 0;
-    while (i < map->hight)
+    while (i < map->height)
         visited[i++] = (int *)calloc(map->length, sizeof(int));
-    can_escape = flood_fill_check(map->real_map, map->hight, map->length, player_x, player_y, visited);
+    can_escape = flood_fill_check(map->real_map, map->height, map->length, player_x, player_y, visited);
     i = 0;
-    while (i < map->hight)
+    while (i < map->height)
         free(visited[i++]);
     free(visited);
     //if (can_escape == INVALID)

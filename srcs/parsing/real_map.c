@@ -8,10 +8,10 @@ int init_real_map(void)
 
     i = 0;
     map = get_data()->map;
-    map->real_map = malloc(sizeof(int *) * map->hight);
+    map->real_map = malloc(sizeof(int *) * map->height);
     if (!map->real_map)
         return (INVALID);
-    while (i < map->hight)
+    while (i < map->height)
     {
         map->real_map[i] = malloc(sizeof(int) * map->length);
         if (!map->real_map[i])
@@ -34,7 +34,7 @@ int fill_real_map(void)
 
     map = get_data()->map;
     i = 0;
-    while (i < map->hight)
+    while (i < map->height)
     {
         j = 0;
         while (j < map->length)
