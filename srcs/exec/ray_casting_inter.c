@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/07 13:47:26 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:37:42 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ float	h_inter(t_player *p, t_ray *ray, float angle)
 			ray->x += ray->x_step;
 			ray->y += ray->y_step;
 	}
+	ray->h_x = ray->x;
+	ray->h_y = ray->y;
 	return (sqrt(pow(ray->x - p->pos_x, 2) + pow(ray->y - p->pos_y, 2)));
 }
 
@@ -100,5 +102,7 @@ float	v_inter(t_player *p, t_ray *ray, float angle)
 			ray->x += ray->x_step;
 			ray->y += ray->y_step;
 	}
+	ray->v_x = ray->x;
+	ray->v_y = ray->y;
 	return (sqrt(pow(ray->x - p->pos_x, 2) + pow(ray->y - p->pos_y, 2)));
 }

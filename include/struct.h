@@ -18,12 +18,24 @@ typedef struct t_color
     int B;
 }   t_color;
 
+typedef struct s_texture
+{
+    char *path;
+    char **lines;
+    int     width;
+    int     height;
+    int     nb_colors;
+    int *color;
+    char *key;
+    char *data;
+}   t_texture;
+
 typedef struct s_textures
 {
-    char *NO;
-    char *SO;
-    char *EA;
-    char *WE;
+    t_texture *NO;
+    t_texture *SO;
+    t_texture *EA;
+    t_texture *WE;
 }   t_textures;
 
 typedef struct s_player
@@ -45,6 +57,10 @@ typedef struct s_ray
     bool  horizontal;
     float x_step;
     float y_step;
+    float h_x;
+    float h_y;
+    float v_x;
+    float v_y;
     float x;
     float y;
     int adjust;
@@ -70,4 +86,3 @@ typedef struct s_data
     t_color     *F;
     t_game      *game;
 }   t_data;
-

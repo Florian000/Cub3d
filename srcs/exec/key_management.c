@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/07 14:14:36 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:22:20 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,9 @@ void	check_hits(t_player *player, double x, double y, t_map *map)
 	new_y = floor((player->pos_y + y) / TILE_SIZE);
 	if (map->brut_map[new_y][new_x] == '0')
 	{
-		printf(" - ok - ");
 		player->pos_x += x;
 		player->pos_y += y;
-		printf("back x = %f, y = %f\n", player->pos_x, player->pos_y );
 	}
-	else
-		printf("back x = %f, y = %f\n", player->pos_x + x, player->pos_y + y);
 }
 
 void	move_player(t_player *player)
@@ -85,13 +81,11 @@ void	move_player(t_player *player)
 	{
 		move_x = cos(player->angle) * PLAYER_SPEED;
 		move_y = sin(player->angle) * PLAYER_SPEED;
-		printf("back x = %f, y = %f", move_x, move_y);
 	}
 	if (player->y_way == -1)
 	{
 		move_x = -cos(player->angle) * PLAYER_SPEED;
 		move_y = -sin(player->angle) * PLAYER_SPEED;
-		printf("front x = %f, y = %f", move_x, move_y);
 	}
 	check_hits(player, move_x, move_y, player->cub->map);
 }
