@@ -27,12 +27,12 @@
 #define ERR_MALLOC  40
 
 //GAME DEFINE
-#define WIDTH 2500
-#define HEIGHT 1200
+#define WIDTH 1000
+#define HEIGHT 1000
 #define WIN_NAME "CUB3D"
 #define TILE_SIZE 50
-#define FOV 2
-#define ROTATION_SPEED 0.02
+#define FOV 1
+#define ROTATION_SPEED 0.05..
 #define PLAYER_SPEED 8
 
 //parsing
@@ -72,13 +72,13 @@ float v_inter(t_player *p, t_ray *ray, float angle);
 float nor_angle(float angle);
 
 //Rendering functions
-void render(t_data *cub, int ray);
+void render(t_ray *r, t_player *p, int ray);
 
 
 //key management
 int exit_game(t_game *game);
-void key_press(int key, t_player *player);
-void	key_release(int key, t_player *player);
+int key_press(int key, t_player *player);
+int	key_release(int key, t_player *player);
 void	hook(t_game *g);
 
 //free

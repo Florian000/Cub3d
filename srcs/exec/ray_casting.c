@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_casting.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
+/*   Updated: 2024/12/07 13:51:56 by fgranger         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
-float nor_angle(float angle)
+float	nor_angle(float angle)
 {
 	if (angle < 0)
 		angle += (2 * M_PI);
@@ -9,11 +21,11 @@ float nor_angle(float angle)
 	return (angle);
 }
 
-void cast_rays(t_ray *ray, t_player *player)
+void	cast_rays(t_ray *ray, t_player *player)
 {
-    float h_dist;
-	float v_dist;
-    int count_rays;
+	float	h_dist;
+	float	v_dist;
+	int		count_rays;
 
 	count_rays = 0;
 	ray->ray_ngl = nor_angle(player->angle - (player->fov / 2));
@@ -29,9 +41,8 @@ void cast_rays(t_ray *ray, t_player *player)
 			ray->distance = h_dist;
 			ray->horizontal = false;
 		}
-		render(ray->cub, count_rays);
-		ray->ray_ngl += (player->fov / WIDTH);
-		ray->ray_ngl = nor_angle(ray->ray_ngl);
+		render(ray, player, count_rays);
+		ray->ray_ngl = nor_angle(ray->ray_ngl + (player->fov / WIDTH));
 		count_rays++;
 	}
 }

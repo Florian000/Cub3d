@@ -28,8 +28,8 @@ typedef struct s_textures
 
 typedef struct s_player
 {
-    int pos_x; // PIXEL
-    int pos_y; // PIXEL
+    double pos_x; // PIXEL
+    double pos_y; // PIXEL
     double angle;
     float fov;
     int  rotate;

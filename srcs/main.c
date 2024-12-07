@@ -20,6 +20,6 @@ int main(int argc, char **argv)
     //print_real_map();
     init_game(get_data());
     launcher(get_data()->game);
-    free_data(get_data());
+    exit_game(get_data()->game);
     return (VALID);
 }
