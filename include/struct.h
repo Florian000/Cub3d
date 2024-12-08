@@ -26,9 +26,10 @@ typedef struct s_texture
     int     width;
     int     height;
     int     nb_colors;
+    int     key_size;
     int *color;
-    char *key;
-    char *data;
+    int *key;
+    int *data;
 }   t_texture;
 
 typedef struct s_textures
@@ -87,4 +88,5 @@ typedef struct s_data
     t_color     *C;
     t_color     *F;
     t_game      *game;
+    int         ori;
 }   t_data;

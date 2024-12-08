@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 20:40:57 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:57:39 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	exit_game(t_game *game, char *str)
+long	custom_hex_to_long(const char *str)
 {
-	if (game->mlx_img)
-		mlx_destroy_image(game->mlx_p, game->mlx_img);
-	if (game->mlx_win)
-		mlx_destroy_window(game->mlx_p, game->mlx_win);
-	if (game->mlx_p)
+	long	result;
+	int		i;
+	int		sign;
+	int		digit;
+
+	i = 0;
+	result = 0;
+	sign = 1;
+	while (str[i] != '\0')
 	{
-		mlx_destroy_display(game->mlx_p);
-		free(game->mlx_p);
+		if (str[i] >= '0' && str[i] <= '9')
+			digit = str[i] - '0';
+		else if (str[i] >= 'a' && str[i] <= 'f')
+			digit = str[i] - 'a' + 10;
+		else if (str[i] >= 'A' && str[i] <= 'F')
+			digit = str[i] - 'A' + 10;
+		else
+			break ;
+		result = result * 16 + digit;
+		i++;
 	}
-	if (str != NULL)
-	{
-		ft_putstr_fd(RED, STDERR_FILENO);
-		ft_putstr_fd("ERROR : ", STDERR_FILENO);
-		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
-	}
-	free_data();
-	exit(0);
+	return (result * sign);
 }

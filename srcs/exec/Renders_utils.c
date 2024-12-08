@@ -6,11 +6,16 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 10:38:17 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:41:50 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+int	get_rgb(int R, int G, int B)
+{
+	return ((R << 16) | (G << 8) | B);
+}
 
 void	my_mlx_pixel_put(void *mlx_img, int x, int y, int color)
 {
@@ -47,7 +52,8 @@ int	get_color(t_texture *texture, int x, int y)
 	int	i;
 
 	i = 0;
-	while (texture->key[i] != texture->data[y * texture->width + x])
+	while (i < texture->nb_colors && texture->key[i]
+		!= texture->data[y * texture->width + x])
 		i++;
 	return (texture->color[i]);
 }

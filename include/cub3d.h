@@ -30,21 +30,27 @@
 #define WIDTH 1000
 #define HEIGHT 1000
 #define WIN_NAME "CUB3D"
-#define TILE_SIZE 32
+#define TILE_SIZE 64
 #define FOV 1
 #define ROTATION_SPEED 0.05
 #define PLAYER_SPEED 8
 
+#define PRINT_WIDTH 80
+#define GREEN  "\033[1;32m"
+#define RED "\033[1;31m" 
+#define YELLOW "\033[1;33m"
+#define BLUE "\033[1;34m"
+
 //parsing
 //check_argsg
-int     check_arguments(int argc, char **argv);
-int     read_map(char *file);
+void     check_arguments(int argc, char **argv);
+void     read_map(char *file);
 int     check_first_args(char *str);
 int     add_first_args(char *str);
 int end_init_game(t_data *data);
 
 //parsing
-int     parsing(int argc, char **argv);
+void     parsing(int argc, char **argv);
 
 //real_map
 int     init_real_map(void);
@@ -56,12 +62,15 @@ int     validate_map(t_map *map);
 //init
 int init_map(t_data *data);
 int     init_data(void);
+int init_text(t_texture *t);
 
 //exec/errors
 int     err(char *str);
 void    *err_null(char *str);
+void exit_print(void);
 
 //Startgame
+void welcome_print(void);
 int		launcher(t_game *game);
 int init_game(t_data *cub);
 
@@ -78,9 +87,10 @@ void	my_mlx_pixel_put(void *mlx_img, int x, int y, int color);
 t_texture	*get_texture(t_ray *r, int flag);
 int	get_color(t_texture *texture, int x, int y);
 double	get_xpm_x(t_texture *t, t_ray *ray);
+int get_rgb(int R, int G, int B);
 
 //key management
-int exit_game(t_game *game);
+int	exit_game(t_game *game, char *str);
 int key_press(int key, t_player *player);
 int	key_release(int key, t_player *player);
 void	hook(t_game *g);
@@ -96,5 +106,8 @@ void    print_real_map(void);
 //main
 t_data  *get_data(void);
 int     main(int argc, char **argv);
+
+//utils
+long	custom_hex_to_long(const char *str);
 
 #endif

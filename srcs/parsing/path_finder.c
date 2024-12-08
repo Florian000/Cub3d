@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_finder.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvittoz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 19:04:45 by jvittoz           #+#    #+#             */
+/*   Updated: 2024/12/08 19:04:47 by jvittoz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 // Check if the current position is within bounds
@@ -48,12 +60,13 @@ int validate_map(t_map *map)
         j = 0;
         while (j < map->length)
         {
-            if (map->real_map[i][j] > 10) //need more checks of player
+            if (map->real_map[i][j] > 10) // multiple players ?
             {
                 map->pos_x = j;
                 map->pos_y = i;
                 player_x = j;
                 player_y = i;
+                get_data()->ori = map->real_map[i][j];
                 break;
             }
             j++;

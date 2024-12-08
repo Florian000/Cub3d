@@ -11,13 +11,10 @@ t_data  *get_data(void)
 int main(int argc, char **argv)
 {
     init_data();
-    if (parsing(argc, argv) == INVALID)
-    {
-         //free_data(get_data());
-         return (err("bad parsing"));
-    }
-    if (init_game(get_data()) == VALID)
-        launcher(get_data()->game);
-    exit_game(get_data()->game);
+    parsing(argc, argv);
+    init_game(get_data());
+    welcome_print();
+    launcher(get_data()->game);
+    exit_game(get_data()->game, NULL);
     return (VALID);
 }

@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/07 20:37:42 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:02:57 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	stop_ray(float x, float y, t_map *map)
 	if (y_m >= map->height || x_m >= map->length)
 		return (true);
 	if (map->brut_map[y_m] && x_m < ft_strlen(map->brut_map[y_m]))
-		if (map->brut_map[y_m][x_m] == '0')
+		if (map->brut_map[y_m][x_m] != '1')
 			return (false);
 	return (true);
 }

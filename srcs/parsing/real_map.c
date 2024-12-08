@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   real_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvittoz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 19:04:51 by jvittoz           #+#    #+#             */
+/*   Updated: 2024/12/08 19:04:54 by jvittoz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 //prepares the map of int easyer to use (does not check hight or length)
@@ -48,7 +60,7 @@ int fill_real_map(void)
         }
         while (j < map->length)
         {
-            if (j < ft_strlen(map->brut_map[i]) && map->brut_map[i][j])
+            if (j < (int)ft_strlen(map->brut_map[i]) && map->brut_map[i][j])
             {
                 if (ft_isspace(map->brut_map[i][j]) == 1)
                     map->real_map[i][j] = 0;

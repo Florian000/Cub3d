@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/07 20:22:20 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:03:22 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_release(int key, t_player *player)
 int	key_press(int key, t_player *player)
 {
 	if (key == XK_Escape)
-		exit_game(player->cub->game);
+		exit_game(player->cub->game, NULL);
 	else if (key == XK_A || key == XK_a)
 		player->x_way = -1;
 	else if (key == XK_D || key == XK_d)
@@ -55,7 +55,7 @@ void	check_hits(t_player *player, double x, double y, t_map *map)
 
 	new_x = floor((player->pos_x + x) / TILE_SIZE);
 	new_y = floor((player->pos_y + y) / TILE_SIZE);
-	if (map->brut_map[new_y][new_x] == '0')
+	if (map->brut_map[new_y][new_x] != '1')
 	{
 		player->pos_x += x;
 		player->pos_y += y;
