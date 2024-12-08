@@ -21,13 +21,13 @@ int add_texture_to_data(char **tab)
 
     t = get_data()->textures;
     if (ft_strncmp(tab[0], "NO", 3) == VALID)
-        t->NO = ft_strdup(tab[1]);
+        t->NO->path = ft_strdup(tab[1]);
     if (ft_strncmp(tab[0], "SO", 3) == VALID)
-        t->SO = ft_strdup(tab[1]);
+        t->SO->path = ft_strdup(tab[1]);
     if (ft_strncmp(tab[0], "WE", 3) == VALID)
-        t->WE = ft_strdup(tab[1]);
+        t->WE->path = ft_strdup(tab[1]);
     if (ft_strncmp(tab[0], "EA", 3) == VALID)
-        t->EA = ft_strdup(tab[1]);
+        t->EA->path = ft_strdup(tab[1]);
     return (VALID);
 }
 
@@ -41,9 +41,9 @@ int add_texture(char *str)
     if (tab[0] && tab[1] && !tab[2])
     {
         add_texture_to_data(tab);
-        return (ft_free(VALID, "s", tab));
+        return (ft_free2(VALID, tab));
     }
-    return (ft_free(INVALID, "s", tab));
+    return (ft_free2(INVALID, tab));
 }
 
 int check_color(char **nb)
@@ -99,9 +99,13 @@ int add_color(char *str)
     tab = ft_split(str, ' ');
     nb = ft_split(tab[1], ',');
     if (check_color(nb) == INVALID)
-        return (ft_free(INVALID, "ss", tab, nb));
+    {
+        ft_free2(INVALID, nb);
+        return (ft_free2(INVALID, tab));
+    }
     add_color_to_data(nb, tab[0]);
-    return (ft_free(VALID, "ss", tab, nb));
+    ft_free2(VALID, nb);
+    return (ft_free2(VALID, tab));
 }
 
 int add_first_args(char *str)

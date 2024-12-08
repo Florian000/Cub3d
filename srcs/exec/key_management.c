@@ -60,6 +60,14 @@ void	check_hits(t_player *player, double x, double y, t_map *map)
 		player->pos_x += x;
 		player->pos_y += y;
 	}
+	if (map->brut_map[new_y][new_x] == 'N'
+		|| map->brut_map[new_y][new_x] == 'S'
+		|| map->brut_map[new_y][new_x] == 'E'
+		|| map->brut_map[new_y][new_x] == 'W')
+	{
+		player->pos_x += x;
+		player->pos_y += y;
+	}
 }
 
 void	move_player(t_player *player)

@@ -14,6 +14,5 @@
 
 int	exit_game(t_game *game)
 {
-	clean_all(game->cub);
 	exit(0);
 }

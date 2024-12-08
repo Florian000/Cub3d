@@ -21,11 +21,12 @@ void    print_brut_map(void)
     printf("B : %d\n\n", data->C->B);
 
     printf("Textures : \n");
-    printf("NO : %s\n", data->textures->NO);
-    printf("SO : %s\n", data->textures->SO);
-    printf("EA : %s\n", data->textures->EA);
-    printf("WE : %s\n\n", data->textures->WE);
-
+    
+    printf("NO : %s\n", data->textures->NO->path);
+    printf("SO : %s\n", data->textures->SO->path);
+    printf("EA : %s\n", data->textures->EA->path);
+    printf("WE : %s\n\n", data->textures->WE->path);
+    
     while (data->map->brut_map[i])
         printf("%s\n", data->map->brut_map[i++]);
     printf("\n\n");

@@ -5,8 +5,8 @@ typedef struct s_map
 {
     int     height;
     int     length;
-    int     pos_x; //player position x axis
-    int     pos_y; //player position y axis
+    int     pos_x;
+    int     pos_y;
     char    **brut_map;
     int     **real_map;
 }   t_map;

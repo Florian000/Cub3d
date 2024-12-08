@@ -33,18 +33,29 @@ int fill_real_map(void)
     int     j;
 
     map = get_data()->map;
+    if (!map || !map->brut_map || !map->real_map)
+        return (INVALID);
     i = 0;
     while (i < map->height)
     {
         j = 0;
+        if (!map->brut_map[i])
+        {
+            while (j < map->length)
+                map->real_map[i][j++] = 0;
+            i++;
+            continue;
+        }
         while (j < map->length)
         {
-            if (map->brut_map[i] && map->brut_map[i][j])
+            if (j < ft_strlen(map->brut_map[i]) && map->brut_map[i][j])
             {
                 if (ft_isspace(map->brut_map[i][j]) == 1)
                     map->real_map[i][j] = 0;
+                else if ((map->brut_map[i][j]))
+                    map->real_map[i][j] = map->brut_map[i][j] - '0';
                 else
-                    map->real_map[i][j] = map->brut_map[i][j] - 48;
+                    map->real_map[i][j] = 0;
             }
             else
                 map->real_map[i][j] = 0;

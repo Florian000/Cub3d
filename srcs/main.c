@@ -11,14 +11,16 @@ t_data  *get_data(void)
 int main(int argc, char **argv)
 {
     init_data();
-    // if (parsing(argc, argv) == INVALID)
-    // {
-    //     free_data(get_data());
-    //     return (err("bad parsing"));
-    // }
-    //print_brut_map();
-    //print_real_map();
+    if (parsing(argc, argv) == INVALID)
+    {
+         //free_data(get_data());
+         return (err("bad parsing"));
+    }
+    print_brut_map();
+    print_real_map();
+    printf("good init\n");
     init_game(get_data());
+    printf("good init\n");
     launcher(get_data()->game);
     exit_game(get_data()->game);
     return (VALID);

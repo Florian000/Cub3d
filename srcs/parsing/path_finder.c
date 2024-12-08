@@ -32,7 +32,6 @@ int flood_fill_check(int **map, int height, int length, int x, int y, int **visi
     return (VALID);
 }
 
-
 //flood the map to check player is cosed
 int validate_map(t_map *map) 
 {
@@ -49,8 +48,10 @@ int validate_map(t_map *map)
         j = 0;
         while (j < map->length)
         {
-            if (map->real_map[i][j] > 10)
+            if (map->real_map[i][j] > 10) //need more checks of player
             {
+                map->pos_x = j;
+                map->pos_y = i;
                 player_x = j;
                 player_y = i;
                 break;
@@ -72,8 +73,8 @@ int validate_map(t_map *map)
     while (i < map->height)
         free(visited[i++]);
     free(visited);
-    //if (can_escape == INVALID)
-     //   return err("Open map");
+    if (can_escape == INVALID)
+       return err("Open map");
     printf("The map is valid: the player cannot escape.\n");
     return VALID;
 }
