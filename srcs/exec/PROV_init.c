@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/07 20:04:01 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:26:19 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void init_argument(t_data *cub) // init the data structure
 {
 	cub->map->brut_map = calloc(10, sizeof(char *));
-	cub->map->brut_map[0] = ft_strdup("1111111111111111111111111111111111111111111111111111111111111");
-	cub->map->brut_map[1] = ft_strdup("2000000000000000000000000000000000000400000000000000000000000444");
-	cub->map->brut_map[2] = ft_strdup("200000011111111000000000444444444440444404444440000004444444444");
-	cub->map->brut_map[3] = ft_strdup("20000001000000000000444444444444444000000444444000000044444444");
+	cub->map->brut_map[0] = ft_strdup("           1111111111111111111111111111111111111111111111111111111111111");
+	cub->map->brut_map[1] = ft_strdup("           2000000000000000000000000000000000000400000000000000000000000444");
+	cub->map->brut_map[2] = ft_strdup("           200000011111111000000000444444444440444404444440000004444444444");
+	cub->map->brut_map[3] = ft_strdup("11111111111120000001000000000000444444444444444000000444444000000044444444");
 	cub->map->brut_map[4] = ft_strdup("20000001000000000000444444444444444444444444444400000044444444");
 	cub->map->brut_map[5] = ft_strdup("2000000100000100000044444444444444444444444444444400044444444");
 	cub->map->brut_map[6] = ft_strdup("200000000000000000000000000000000000000000000000000000004");
 	cub->map->brut_map[7] = ft_strdup("2000000000000000000000000000000000000000000000000000000004");
 	cub->map->brut_map[8] = ft_strdup("3333333333333333333333333333333333333333333333333333333333");
 	cub->map->brut_map[9] = NULL;
-	cub->map->pos_x= 2;
-	cub->map->pos_y = 2;
-	cub->map->length = 98;
+	cub->map->pos_x= 5;
+	cub->map->pos_y = 5;
+	cub->map->length = 75;
 	cub->map->height= 9;
 }
 
@@ -124,6 +124,11 @@ void print_text(t_texture *t)
 	printf("map : %s \n", t->data);
 }
 
+int get_rgb(int R, int G, int B)
+{
+	return ((R << 16) | (G << 8) | B);
+}
+
 void init_game(t_data *cub)
 {
 	cub->game = calloc(1, sizeof(t_game));
@@ -137,9 +142,11 @@ void init_game(t_data *cub)
 	cub->textures->WE = init_text("./textures/dirt.xpm");
 	cub->textures->SO = init_text("./textures/bricks1.xpm");
 	cub->C->R =225;
-	cub->C->G =30;
+	cub->C->G =225;
 	cub->C->B =0;
-	cub->F->R =220;
-	cub->F->G =100;
+	cub->F->R =0;
+	cub->F->G =0;
 	cub->F->B =0;
+	cub->F->color = get_rgb(cub->F->R, cub->F->G, cub->F->B);
+	cub->C->color = get_rgb(cub->C->R, cub->C->G, cub->C->B);
 }

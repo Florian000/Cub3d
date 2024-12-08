@@ -73,7 +73,10 @@ float nor_angle(float angle);
 
 //Rendering functions
 void render(t_ray *r, t_player *p, int ray);
-
+void	my_mlx_pixel_put(void *mlx_img, int x, int y, int color);
+t_texture	*get_texture(t_ray *r, int flag);
+int	get_color(t_texture *texture, int x, int y);
+double	get_xpm_x(t_texture *t, t_ray *ray);
 
 //key management
 int exit_game(t_game *game);

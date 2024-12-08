@@ -16,6 +16,7 @@ typedef struct t_color
     int R;
     int G;
     int B;
+    int color;
 }   t_color;
 
 typedef struct s_texture
@@ -64,6 +65,7 @@ typedef struct s_ray
     float x;
     float y;
     int adjust;
+    double wall_h;
     t_data *cub;
 } t_ray;
 
