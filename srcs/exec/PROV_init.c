@@ -55,7 +55,7 @@ void get_params(t_texture *texture)
 	texture->color = calloc(texture->nb_colors + 1, sizeof(int));
 }
 
-t_texture *init_text(char *path)
+int init_text(t_texture *t)
 {
 	int i;
 	int j;
@@ -63,11 +63,10 @@ t_texture *init_text(char *path)
 	t_texture *texture;
 	i = 4;
 	j = 0;
-	texture = calloc(1, sizeof(t_texture));
-	texture->path = path;
+	texture = t;
 	texture->lines = get_xpmfile(texture->path);
 	if (ft_strncmp(texture->lines[0], "/* XPM */", 9) != 0)
-		return ;
+		return INVALID;
 	get_params(texture);
 	while (texture->lines[i]&& ft_strncmp(texture->lines[i], "/* pixels */", 12) != 0)
 	{
@@ -83,7 +82,7 @@ t_texture *init_text(char *path)
 		else
 			texture->data = ft_strjoin(texture->data, ft_substr(texture->lines[i], 1, texture->width));
 	}
-	return (texture);
+	return (VALID);
 }
 
 void print_text(t_texture *t)
@@ -112,10 +111,10 @@ int get_rgb(int R, int G, int B)
 void init_game(t_data *cub)
 {
 	init_player(cub);
-	cub->textures->EA = init_text("./textures/bricks2.xpm");
-	cub->textures->NO = init_text("./textures/bricks2.xpm");
-	cub->textures->WE = init_text("./textures/dirt.xpm");
-	cub->textures->SO = init_text("./textures/bricks1.xpm");
+	init_text(cub->textures->EA);
+	init_text(cub->textures->NO);
+	init_text(cub->textures->WE);
+	init_text(cub->textures->SO);
 	cub->F->color = get_rgb(cub->F->R, cub->F->G, cub->F->B);
 	cub->C->color = get_rgb(cub->C->R, cub->C->G, cub->C->B);
 }

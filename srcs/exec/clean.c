@@ -23,7 +23,6 @@ void	clean_map(t_map *map)
 			free(map->brut_map[i++]);
 		free(map->brut_map);
 	}
-	//add free realmap
 	free(map);
 }
 
