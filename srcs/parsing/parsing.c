@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:04:32 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:58:59 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:08:41 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void parsing(int argc, char **argv)
 
 	data = get_data();
 	check_arguments(argc, argv);
-	if (read_map(argv[1]) == INVALID)
-		exit_game(get_data()->game, "map error");
+	read_map(argv[1]);
 	if (init_real_map() == INVALID)
 		exit_game(get_data()->game, "real map error");
 	fill_real_map();

@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 20:02:57 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:11:17 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ bool	stop_ray(float x, float y, t_map *map)
 	y_m = floor(y / TILE_SIZE);
 	if (y_m >= map->height || x_m >= map->length)
 		return (true);
-	if (map->brut_map[y_m] && x_m < ft_strlen(map->brut_map[y_m]))
+	if (map->brut_map[y_m] && x_m < (int)ft_strlen(map->brut_map[y_m]))
 		if (map->brut_map[y_m][x_m] != '1')
 			return (false);
 	return (true);
 }
 
-void	get_steps(t_player *player, t_ray *ray, float angle, char inter)
+void	get_steps(t_ray *ray, float angle, char inter)
 {
 	if (inter == 'v')
 	{
@@ -81,7 +81,7 @@ void	get_position(t_player *p, t_ray *ray, float angle, char inter)
 
 float	h_inter(t_player *p, t_ray *ray, float angle)
 {
-	get_steps(p, ray, angle, 'h');
+	get_steps(ray, angle, 'h');
 	get_position(p, ray, angle, 'h');
 	while (stop_ray(ray->x, ray->y - ray->adjust, p->cub->map) == false)
 	{
@@ -95,7 +95,7 @@ float	h_inter(t_player *p, t_ray *ray, float angle)
 
 float	v_inter(t_player *p, t_ray *ray, float angle)
 {
-	get_steps(p, ray, angle, 'v');
+	get_steps(ray, angle, 'v');
 	get_position(p, ray, angle, 'v');
 	while (stop_ray(ray->x + ray->adjust, ray->y, p->cub->map) == false)
 	{

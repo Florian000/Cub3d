@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 11:00:19 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:10:02 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	draw_floor_ceiling(t_data *cub, int ray, int ceiling_p, int floor_p)
 {
 	int	i;
-	int	c;
 
 	i = floor_p;
 	while (i < HEIGHT)

@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 20:57:27 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:09:42 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ void	init_text_map(t_texture *t)
 
 int	init_text(t_texture *t)
 {
-	char	*temp;
-
 	t->lines = get_xpmfile(t->path);
 	if (t->lines == NULL)
 		return (err("Bad malloc / fd"));
