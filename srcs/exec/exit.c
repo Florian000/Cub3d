@@ -14,5 +14,6 @@
 
 int	exit_game(t_game *game)
 {
+	free_data();
 	exit(0);
 }

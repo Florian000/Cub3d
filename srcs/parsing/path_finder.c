@@ -75,6 +75,5 @@ int validate_map(t_map *map)
     free(visited);
     if (can_escape == INVALID)
        return err("Open map");
-    printf("The map is valid: the player cannot escape.\n");
     return VALID;
 }

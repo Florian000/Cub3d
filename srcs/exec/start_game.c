@@ -21,6 +21,8 @@ int	game_loop(t_game *game)
 int	launcher(t_game *g)
 {
 	g->mlx_p = mlx_init();
+	if (g->mlx_p == 0)
+		return (INVALID);
 	g->mlx_img = mlx_new_image(g->mlx_p, WIDTH, HEIGHT);
 	g->mlx_win = mlx_new_window(g->mlx_p, WIDTH, HEIGHT, WIN_NAME);
 	cast_rays(g->ray, g->player);

@@ -21,13 +21,29 @@ int add_texture_to_data(char **tab)
 
     t = get_data()->textures;
     if (ft_strncmp(tab[0], "NO", 3) == VALID)
+    {
         t->NO->path = ft_strdup(tab[1]);
+        if (!t->NO->path)
+            return (err("bad malloc"));
+    }
     if (ft_strncmp(tab[0], "SO", 3) == VALID)
+    {
         t->SO->path = ft_strdup(tab[1]);
+        if (!t->SO->path)
+            return (err("bad malloc"));
+    }
     if (ft_strncmp(tab[0], "WE", 3) == VALID)
+    {
         t->WE->path = ft_strdup(tab[1]);
+        if (!t->WE->path)
+            return (err("bad malloc"));
+    }
     if (ft_strncmp(tab[0], "EA", 3) == VALID)
+    {
         t->EA->path = ft_strdup(tab[1]);
+        if (!t->EA->path)
+            return (err("bad malloc"));
+    }
     return (VALID);
 }
 

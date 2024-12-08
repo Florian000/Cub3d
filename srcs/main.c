@@ -16,12 +16,8 @@ int main(int argc, char **argv)
          //free_data(get_data());
          return (err("bad parsing"));
     }
-    print_brut_map();
-    print_real_map();
-    printf("good init\n");
-    init_game(get_data());
-    printf("good init\n");
-    launcher(get_data()->game);
+    if (init_game(get_data()) == VALID)
+        launcher(get_data()->game);
     exit_game(get_data()->game);
     return (VALID);
 }

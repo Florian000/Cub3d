@@ -63,7 +63,7 @@ void    *err_null(char *str);
 
 //Startgame
 int		launcher(t_game *game);
-void init_game(t_data *cub); // provisoire
+int init_game(t_data *cub);
 
 //RAYCATING
 
@@ -86,7 +86,7 @@ int	key_release(int key, t_player *player);
 void	hook(t_game *g);
 
 //free
-int     free_data(t_data *data);
+int     free_data(void);
 int ft_free2(int res, char **str);
 
 //debug

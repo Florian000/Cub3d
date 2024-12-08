@@ -48,9 +48,7 @@ int	get_color(t_texture *texture, int x, int y)
 
 	i = 0;
 	while (texture->key[i] != texture->data[y * texture->width + x])
-	{
 		i++;
-	}
 	return (texture->color[i]);
 }
 
