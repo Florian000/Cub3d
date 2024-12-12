@@ -12,19 +12,22 @@
 
 #include "../../include/cub3d.h"
 
-int	check_first_args(char *str)
+int	sub_add_txt(t_texture *t, char **tab)
 {
-	if (*str && str[0] == '\n')
-		return (VALID);
-	if (ft_strncmp(str, "NO ", 3) == VALID
-		|| ft_strncmp(str, "SO ", 3) == VALID
-		|| ft_strncmp(str, "WE ", 3) == VALID
-		|| ft_strncmp(str, "EA ", 3) == VALID)
-		return (VALID);
-	if (ft_strncmp(str, "C ", 2) == VALID
-		|| ft_strncmp(str, "F ", 2) == VALID)
-		return (VALID);
-	return (INVALID);
+	if (t->path != NULL)
+		return (INVALID);
+	if (t == NULL)
+	{
+		t = malloc(sizeof(t_texture));
+		if (!t)
+			return (err("bad malloc"));
+	}
+	if (t->path)
+		free(t->path);
+	t->path = ft_strdup(tab[1]);
+	if (!t->path)
+		return (err("bad malloc"));
+	return (VALID);
 }
 
 int	add_texture_to_data(char **tab)
@@ -35,69 +38,13 @@ int	add_texture_to_data(char **tab)
 	if (!tab[0] || !tab[1])
 		return (err("Invalid texture format or missing arguments"));
 	if (ft_strncmp(tab[0], "NO", 3) == VALID)
-	{
-		if (t->NO->path != NULL)
-			return (INVALID);
-		if (t->NO == NULL)
-		{
-			t->NO = malloc(sizeof(*(t->NO)));
-			if (!t->NO)
-				return (err("bad malloc"));
-		}
-		if (t->NO->path)
-			free(t->NO->path);
-		t->NO->path = ft_strdup(tab[1]);
-		if (!t->NO->path)
-			return (err("bad malloc"));
-	}
+		return (sub_add_txt(t->no, tab));
 	else if (ft_strncmp(tab[0], "SO", 3) == VALID)
-	{
-		if (t->SO->path != NULL)
-			return (INVALID);
-		if (t->SO == NULL)
-		{
-			t->SO = malloc(sizeof(*(t->SO)));
-			if (!t->SO)
-				return (err("bad malloc"));
-		}
-		if (t->SO->path)
-			free(t->SO->path);
-		t->SO->path = ft_strdup(tab[1]);
-		if (!t->SO->path)
-			return (err("bad malloc"));
-	}
+		return (sub_add_txt(t->so, tab));
 	else if (ft_strncmp(tab[0], "WE", 3) == VALID)
-	{
-		if (t->WE->path != NULL)
-			return (INVALID);
-		if (t->WE == NULL)
-		{
-			t->WE = malloc(sizeof(*(t->WE)));
-			if (!t->WE)
-				return (err("bad malloc"));
-		}
-		if (t->WE->path)
-			free(t->WE->path);
-		t->WE->path = ft_strdup(tab[1]);
-		if (!t->WE->path)
-			return (err("bad malloc"));
-	}
+		return (sub_add_txt(t->we, tab));
 	else if (ft_strncmp(tab[0], "EA", 3) == VALID)
-	{
-		if (t->EA->path != NULL)
-			return (INVALID);
-		if (t->EA == NULL)
-		{
-			t->EA = malloc (sizeof(*(t->EA)));
-			if (!t->EA)
-				return (err("bad malloc"));
-		}
-		if (t->EA->path)
-			free(t->EA->path);
-		t->EA->path = ft_strdup(tab[1]);
-		if (!t->EA->path)
-			return (err("bad malloc"));
-	}
+		return (sub_add_txt(t->ea, tab));
 	else
 		return (err("Unknown texture identifier"));
 	return (VALID);
@@ -146,17 +93,17 @@ int	add_color_to_data(char **nb, char *color)
 
 	if (ft_strncmp(color, "F", 2) == VALID)
 	{
-		c = get_data()->F;
-		c->R = ft_atoi(nb[0]);
-		c->G = ft_atoi(nb[1]);
-		c->B = ft_atoi(nb[2]);
+		c = get_data()->f;
+		c->r = ft_atoi(nb[0]);
+		c->g = ft_atoi(nb[1]);
+		c->b = ft_atoi(nb[2]);
 	}
 	if (ft_strncmp(color, "C", 2) == VALID)
 	{
-		c = get_data()->C;
-		c->R = ft_atoi(nb[0]);
-		c->G = ft_atoi(nb[1]);
-		c->B = ft_atoi(nb[2]);
+		c = get_data()->c;
+		c->r = ft_atoi(nb[0]);
+		c->g = ft_atoi(nb[1]);
+		c->b = ft_atoi(nb[2]);
 	}
 	return (VALID);
 }

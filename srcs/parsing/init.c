@@ -21,10 +21,10 @@ int	init_c(t_data *data)
 	c = malloc(sizeof(t_color));
 	if (!c)
 		return (INVALID);
-	c->B = -1;
-	c->G = -1;
-	c->R = -1;
-	data->C = c;
+	c->b = -1;
+	c->g = -1;
+	c->r = -1;
+	data->c = c;
 	return (VALID);
 }
 
@@ -37,10 +37,10 @@ int	init_f(t_data *data)
 	c = malloc(sizeof(t_color));
 	if (!c)
 		return (INVALID);
-	c->B = -1;
-	c->G = -1;
-	c->R = -1;
-	data->F = c;
+	c->b = -1;
+	c->g = -1;
+	c->r = -1;
+	data->f = c;
 	return (VALID);
 }
 
@@ -71,10 +71,10 @@ int	init_textures(t_data *data)
 	t = malloc(sizeof(t_textures));
 	if (!t)
 		return (INVALID);
-	t->EA = init_texture();
-	t->NO = init_texture();
-	t->SO = init_texture();
-	t->WE = init_texture();
+	t->ea = init_texture();
+	t->no = init_texture();
+	t->so = init_texture();
+	t->we = init_texture();
 	data->textures = t;
 	return (VALID);
 }

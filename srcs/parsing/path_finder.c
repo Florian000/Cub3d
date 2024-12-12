@@ -45,6 +45,33 @@ int	flood_fill_check(int **map, int height, int length, int x, int y, int **visi
 	return (VALID);
 }
 
+int	check_nb_player(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**m;
+	int		res;
+
+	i = 0;
+	res = 0;
+	m = data->map->brut_map;
+	while (m[i])
+	{
+		j = 0;
+		while (m[i][j])
+		{
+			if (m[i][j] == 'N' || m[i][j] == 'S'
+				|| m[i][j] == 'E' || m[i][j] == 'W')
+				res++;
+			j++;
+		}
+		i++;
+	}
+	if (res != 1)
+		return (INVALID);
+	return (VALID);
+}
+
 //flood the map to check player is cosed
 int validate_map(t_map *map)
 {
@@ -56,6 +83,8 @@ int validate_map(t_map *map)
 	int	j;
 
 	i = 0;
+	if (!map || map == NULL)
+		return INVALID;
 	while (i < map->height)
 	{
 		j = 0;
@@ -77,7 +106,7 @@ int validate_map(t_map *map)
 		i++;
 	}
 	if (player_x == -1 || player_y == -1)
-		return (err("No player in map"));
+		return (exit_game(get_data()->game, "player pb"));
 	visited = (int **)malloc(map->height * sizeof(int *));
 	i = 0;
 	while (i < map->height)
@@ -88,6 +117,6 @@ int validate_map(t_map *map)
 		free(visited[i++]);
 	free(visited);
 	if (can_escape == INVALID)
-		return err("Open map");
+		return (exit_game(get_data()->game, "you could escape"));
 	return (VALID);
 }

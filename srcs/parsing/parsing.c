@@ -23,6 +23,9 @@ void	parsing(int argc, char **argv)
 	if (init_real_map() == INVALID)
 		exit_game(get_data()->game, "real map error");
 	fill_real_map();
+	if (check_nb_player(get_data()) == INVALID)
+		exit_game(get_data()->game, "bad nb player");
 	if (validate_map(data->map) == INVALID)
 		exit_game(get_data()->game, "map invalid");
+	check_files_open(data);
 }

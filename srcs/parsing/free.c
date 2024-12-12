@@ -76,8 +76,8 @@ int	free_texture(t_texture *t)
 
 void	null_loop(t_data *data)
 {
-	data->C = NULL;
-	data->F = NULL;
+	data->c = NULL;
+	data->f = NULL;
 	data->game = NULL;
 	data->gd_args = NULL;
 	data->map = NULL;
@@ -88,10 +88,10 @@ int	free_data(t_data *data)
 {
 	if (data == NULL)
 		return (INVALID);
-	if (data->C)
-		free(data->C);
-	if (data->F)
-		free(data->F);
+	if (data->c)
+		free(data->c);
+	if (data->f)
+		free(data->f);
 	if (data->game)
 	{
 		free(data->game->player);
@@ -102,12 +102,13 @@ int	free_data(t_data *data)
 		free_map(data->map);
 	if (data->textures)
 	{
-		free_texture(data->textures->EA);
-		free_texture(data->textures->NO);
-		free_texture(data->textures->SO);
-		free_texture(data->textures->WE);
+		free_texture(data->textures->ea);
+		free_texture(data->textures->no);
+		free_texture(data->textures->so);
+		free_texture(data->textures->we);
 		free(data->textures);
 	}
 	null_loop(data);
+	data = NULL;
 	return (VALID);
 }

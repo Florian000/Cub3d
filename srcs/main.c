@@ -12,8 +12,9 @@
 
 #include "../include/cub3d.h"
 /*
-	-check multiple player apearance
-	-open map message error
+	-open map message error -> new lines in map
+	-recheck E S N W
+	-tab = 1 space ? to change to 4 ?
 */
 
 //gives accessto data
