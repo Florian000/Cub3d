@@ -12,9 +12,9 @@
 
 #include "../../include/cub3d.h"
 
-int ft_free2(int res, char **str)
+int	ft_free2(int res, char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -23,17 +23,9 @@ int ft_free2(int res, char **str)
 	return (res);
 }
 
-int free_game(t_game *g)
+int	free_map(t_map *map)
 {
-	free(g->player);
-	free(g->ray);
-	free(g);
-	return (VALID);
-}
-
-int free_map(t_map *map)
-{
-	int i;
+	int	i;
 
 	if (!map)
 		return (VALID);
@@ -59,10 +51,9 @@ int free_map(t_map *map)
 	return (VALID);
 }
 
-
-int free_texture(t_texture *t)
+int	free_texture(t_texture *t)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (t->path)
@@ -83,40 +74,40 @@ int free_texture(t_texture *t)
 	return (VALID);
 }
 
-int free_data(void)
+void	null_loop(t_data *data)
 {
-	t_data *data;
+	data->C = NULL;
+	data->F = NULL;
+	data->game = NULL;
+	data->gd_args = NULL;
+	data->map = NULL;
+	data->textures = NULL;
+}
 
-	data = get_data();
+int	free_data(t_data *data)
+{
 	if (data == NULL)
 		return (INVALID);
 	if (data->C)
-	{
 		free(data->C);
-		data->C = NULL;
-	}
 	if (data->F)
-	{
 		free(data->F);
-		data->F = NULL;
-	}
 	if (data->game)
 	{
-		free_game(data->game);
-		data->game = NULL;
+		free(data->game->player);
+		free(data->game->ray);
+		free(data->game);
 	}
 	if (data->map)
-	{
 		free_map(data->map);
-		data->map = NULL;
-	}
-	if (data->textures) {
+	if (data->textures)
+	{
 		free_texture(data->textures->EA);
 		free_texture(data->textures->NO);
 		free_texture(data->textures->SO);
 		free_texture(data->textures->WE);
 		free(data->textures);
-		data->textures = NULL;
 	}
+	null_loop(data);
 	return (VALID);
 }

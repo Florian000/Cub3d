@@ -13,9 +13,9 @@
 #include "../../include/cub3d.h"
 
 //goes through all parsing events
-void parsing(int argc, char **argv)
+void	parsing(int argc, char **argv)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = get_data();
 	check_arguments(argc, argv);

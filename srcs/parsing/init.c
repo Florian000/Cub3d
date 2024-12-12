@@ -12,23 +12,13 @@
 
 #include "../../include/cub3d.h"
 
-int init_map(t_data *data)
+int	init_c(t_data *data)
 {
-	if (!data || !data->map)
-		return (INVALID);
+	t_color	*c;
 
-	data->map->height = 0;
-	data->map->length = 0;
-	data->map->brut_map = NULL;
-	data->map->real_map = NULL;
-	return (VALID);
-}
-
-int init_c(t_data *data)
-{
 	if (!data)
 		return (INVALID);
-	t_color *c = malloc(sizeof(t_color));
+	c = malloc(sizeof(t_color));
 	if (!c)
 		return (INVALID);
 	c->B = -1;
@@ -38,12 +28,13 @@ int init_c(t_data *data)
 	return (VALID);
 }
 
-int init_f(t_data *data)
+int	init_f(t_data *data)
 {
+	t_color	*c;
+
 	if (!data)
 		return (INVALID);
-
-	t_color *c = malloc(sizeof(t_color));
+	c = malloc(sizeof(t_color));
 	if (!c)
 		return (INVALID);
 	c->B = -1;
@@ -53,9 +44,9 @@ int init_f(t_data *data)
 	return (VALID);
 }
 
-t_texture *init_texture(void)
+t_texture	*init_texture(void)
 {
-	t_texture *res;
+	t_texture	*res;
 
 	res = malloc(sizeof(t_texture));
 	if (!res)
@@ -71,12 +62,13 @@ t_texture *init_texture(void)
 	return (res);
 }
 
-int init_textures(t_data *data)
+int	init_textures(t_data *data)
 {
+	t_textures	*t;
+
 	if (!data)
 		return (INVALID);
-
-	t_textures *t = malloc(sizeof(t_textures));
+	t = malloc(sizeof(t_textures));
 	if (!t)
 		return (INVALID);
 	t->EA = init_texture();
@@ -87,9 +79,9 @@ int init_textures(t_data *data)
 	return (VALID);
 }
 
-int init_data(void)
+int	init_data(void)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = get_data();
 	if (!data)
@@ -101,14 +93,11 @@ int init_data(void)
 		return (INVALID);
 	if (end_init_game(data) == INVALID)
 		return (INVALID);
-	if (init_map(data) == INVALID ||
-			init_c(data) == INVALID ||
-			init_f(data) == INVALID ||
-			init_textures(data) == INVALID)
-	{
-		//free_data(data);
+	if (init_map(data) == INVALID
+		|| init_c(data) == INVALID
+		|| init_f(data) == INVALID
+		|| init_textures(data) == INVALID)
 		return (INVALID);
-	}
 	data->gd_args = NULL;
 	return (VALID);
 }

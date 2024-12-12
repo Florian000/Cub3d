@@ -12,27 +12,26 @@
 
 #include "../../include/cub3d.h"
 
-int check_first_args(char *str)
+int	check_first_args(char *str)
 {
 	if (*str && str[0] == '\n')
 		return (VALID);
 	if (ft_strncmp(str, "NO ", 3) == VALID
-			|| ft_strncmp(str, "SO ", 3) == VALID
-			|| ft_strncmp(str, "WE ", 3) == VALID
-			|| ft_strncmp(str, "EA ", 3) == VALID)
+		|| ft_strncmp(str, "SO ", 3) == VALID
+		|| ft_strncmp(str, "WE ", 3) == VALID
+		|| ft_strncmp(str, "EA ", 3) == VALID)
 		return (VALID);
 	if (ft_strncmp(str, "C ", 2) == VALID
-			|| ft_strncmp(str, "F ", 2) == VALID)
+		|| ft_strncmp(str, "F ", 2) == VALID)
 		return (VALID);
 	return (INVALID);
 }
 
-int add_texture_to_data(char **tab)
+int	add_texture_to_data(char **tab)
 {
-	t_textures *t;
+	t_textures	*t;
 
 	t = get_data()->textures;
-
 	if (!tab[0] || !tab[1])
 		return (err("Invalid texture format or missing arguments"));
 	if (ft_strncmp(tab[0], "NO", 3) == VALID)
@@ -89,7 +88,7 @@ int add_texture_to_data(char **tab)
 			return (INVALID);
 		if (t->EA == NULL)
 		{
-			t->EA = malloc(sizeof(*(t->EA)));
+			t->EA = malloc (sizeof(*(t->EA)));
 			if (!t->EA)
 				return (err("bad malloc"));
 		}
@@ -104,24 +103,25 @@ int add_texture_to_data(char **tab)
 	return (VALID);
 }
 
-int add_texture(char *str)
+int	add_texture(char *str)
 {
-	char **tab;
+	char	**tab;
+	int		result;
+
 	tab = ft_split(str, ' ');
 	if (!tab)
 		return (INVALID);
 	if (tab[0] && tab[1] && !tab[2])
 	{
-		int result = add_texture_to_data(tab);
+		result = add_texture_to_data(tab);
 		return (ft_free2(result, tab));
 	}
 	return (ft_free2(INVALID, tab));
 }
 
-
-int check_color(char **nb)
+int	check_color(char **nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!nb)
@@ -140,9 +140,9 @@ int check_color(char **nb)
 	return (VALID);
 }
 
-int    add_color_to_data(char **nb, char *color)
+int	add_color_to_data(char **nb, char *color)
 {
-	t_color *c;
+	t_color	*c;
 
 	if (ft_strncmp(color, "F", 2) == VALID)
 	{
@@ -159,41 +159,4 @@ int    add_color_to_data(char **nb, char *color)
 		c->B = ft_atoi(nb[2]);
 	}
 	return (VALID);
-}
-
-int add_color(char *str)
-{
-	char    **tab;
-	char     **nb;
-
-	tab = ft_split(str, ' ');
-	nb = ft_split(tab[1], ',');
-	if (check_color(nb) == INVALID)
-	{
-		ft_free2(INVALID, nb);
-		return (ft_free2(INVALID, tab));
-	}
-	add_color_to_data(nb, tab[0]);
-	ft_free2(VALID, nb);
-	return (ft_free2(VALID, tab));
-}
-
-int add_first_args(char *str)
-{
-	if (ft_strncmp(str, "NO ", 3) == VALID
-			|| ft_strncmp(str, "SO ", 3) == VALID
-			|| ft_strncmp(str, "WE ", 3) == VALID
-			|| ft_strncmp(str, "EA ", 3) == VALID)
-	{
-		int result = add_texture(str);
-		return result;
-	}
-
-	if (ft_strncmp(str, "C ", 2) == VALID
-			|| ft_strncmp(str, "F ", 2) == VALID)
-	{
-		int result = add_color(str);
-		return result;
-	}
-	return (INVALID);
 }

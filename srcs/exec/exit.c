@@ -30,6 +30,6 @@ int	exit_game(t_game *game, char *str)
 		ft_putstr_fd(str, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	free_data();
+	free_data(get_data());
 	exit(0);
 }

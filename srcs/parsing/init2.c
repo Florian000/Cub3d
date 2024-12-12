@@ -12,9 +12,9 @@
 
 #include "../../include/cub3d.h"
 
-t_player *end_init_player(void)
+t_player	*end_init_player(void)
 {
-	t_player *player;
+	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
@@ -30,9 +30,9 @@ t_player *end_init_player(void)
 	return (player);
 }
 
-t_ray *end_init_ray(void)
+t_ray	*end_init_ray(void)
 {
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
@@ -53,9 +53,20 @@ t_ray *end_init_ray(void)
 	return (ray);
 }
 
-int end_init_game(t_data *data)
+int	init_map(t_data *data)
 {
-	t_game *game;
+	if (!data || !data->map)
+		return (INVALID);
+	data->map->height = 0;
+	data->map->length = 0;
+	data->map->brut_map = NULL;
+	data->map->real_map = NULL;
+	return (VALID);
+}
+
+int	end_init_game(t_data *data)
+{
+	t_game	*game;
 
 	game = malloc(sizeof(t_game));
 	if (!game)

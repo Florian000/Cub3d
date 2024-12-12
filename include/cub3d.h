@@ -16,7 +16,7 @@
 #define VALID 0
 #define INVALID 1
 
-#define N       78
+#define N		78
 #define S       83
 #define E       69
 #define W       87
@@ -48,6 +48,7 @@ void     read_map(char *file);
 int     check_first_args(char *str);
 int     add_first_args(char *str);
 int end_init_game(t_data *data);
+void	check_arguments(int argc, char **argv);
 
 //parsing
 void     parsing(int argc, char **argv);
@@ -88,6 +89,10 @@ t_texture	*get_texture(t_ray *r, int flag);
 int	get_color(t_texture *texture, int x, int y);
 double	get_xpm_x(t_texture *t, t_ray *ray);
 int get_rgb(int R, int G, int B);
+int	check_color(char **nb);
+int	add_color_to_data(char **nb, char *color);
+int	add_texture(char *str);
+int	init_map(t_data *data);
 
 //key management
 int	exit_game(t_game *game, char *str);
@@ -96,7 +101,7 @@ int	key_release(int key, t_player *player);
 void	hook(t_game *g);
 
 //free
-int     free_data(void);
+int     free_data(t_data *data);
 int ft_free2(int res, char **str);
 
 //debug
