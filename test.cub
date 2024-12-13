@@ -3,9 +3,8 @@ SO ./textures/bricks2.xpm
 WE ./textures/dirt.xpm
 EA ./textures/lava.xpm
 
-F 220,100,0
-C 225,30,0
-
+F 220oih,0,0
+C 225,30,0 1
        1
       101
      10001
