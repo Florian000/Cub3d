@@ -22,8 +22,10 @@ void	check_arguments(int argc, char **argv)
 		exit_game(get_data()->game, "Wrong number of arguments");
 	temp = argv[1];
 	len = ft_strlen(temp);
-	if (len < 4 || ft_strncmp(temp + len - 4, ".cub", 4) != 0)
+	if (len <= 4 || ft_strncmp(temp + len - 4, ".cub", 4) != 0)
 		exit_game(get_data()->game, "Wrong file extension");
+	if (len > 4 && temp[ft_strlen(temp) - 5] == '/')
+		exit_game(get_data()->game, "Sneky bad file");
 }
 
 int	add_color(char *str)
