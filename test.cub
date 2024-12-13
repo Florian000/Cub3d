@@ -1,10 +1,10 @@
 NO ./textures/bricks1.xpm
 SO ./textures/bricks2.xpm
-WE ./textures/dirt.xpm
-EA ./textures/lava.xpm
+  WE      ./textures/dirt.xpm
+     EA    ./textures/lava.xpm
 
-F 220oih,0,0
-C 225,30,0 1
+F 0,0,0 
+C 225,255,255
        1
       101
      10001

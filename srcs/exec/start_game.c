@@ -31,16 +31,16 @@ void	init_player(t_data *cub)
 int	init_game(t_data *cub)
 {
 	init_player(cub);
-	if (init_text(cub->textures->EA) == INVALID)
+	if (init_text(cub->textures->ea) == INVALID)
 		return (INVALID);
-	if (init_text(cub->textures->NO) == INVALID)
+	if (init_text(cub->textures->no) == INVALID)
 		return (INVALID);
-	if (init_text(cub->textures->WE) == INVALID)
+	if (init_text(cub->textures->we) == INVALID)
 		return (INVALID);
-	if (init_text(cub->textures->SO) == INVALID)
+	if (init_text(cub->textures->so) == INVALID)
 		return (INVALID);
-	cub->F->color = get_rgb(cub->F->R, cub->F->G, cub->F->B);
-	cub->C->color = get_rgb(cub->C->R, cub->C->G, cub->C->B);
+	cub->f->color = get_rgb(cub->f->r, cub->f->g, cub->f->b);
+	cub->c->color = get_rgb(cub->c->r, cub->c->g, cub->c->b);
 	return (VALID);
 }
 

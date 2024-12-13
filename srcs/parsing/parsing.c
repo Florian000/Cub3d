@@ -12,6 +12,27 @@
 
 #include "../../include/cub3d.h"
 
+void	check_end_txt(t_data *data)
+{
+	if (data->textures->ea->path == NULL
+		|| data->textures->no->path == NULL
+		|| data->textures->so->path == NULL
+		|| data->textures->we->path == NULL)
+		exit_game(data->game, "insufficient info");
+}
+
+void	check_end_clr(t_data *data)
+{
+	if (data->c->b < 0
+		|| data->c->r < 0
+		|| data->c->g < 0)
+		exit_game(data->game, "insufficient info");
+	if (data->f->b < 0
+		|| data->f->r < 0
+		|| data->f->g < 0)
+		exit_game(data->game, "insufficient info");
+}
+
 //goes through all parsing events
 void	parsing(int argc, char **argv)
 {
@@ -27,5 +48,7 @@ void	parsing(int argc, char **argv)
 		exit_game(get_data()->game, "bad nb player");
 	if (validate_map(data->map) == INVALID)
 		exit_game(get_data()->game, "map invalid");
+	check_end_txt(get_data());
+	check_end_clr(get_data());
 	check_files_open(data);
 }

@@ -34,16 +34,16 @@ t_texture	*get_texture(t_ray *r, int flag)
 	if (flag == true)
 	{
 		if (r->ray_ngl > M_PI / 2 && r->ray_ngl < 3 * (M_PI / 2))
-			return (r->cub->textures->EA);
+			return (r->cub->textures->ea);
 		else
-			return (r->cub->textures->WE);
+			return (r->cub->textures->we);
 	}
 	else
 	{
 		if (r->ray_ngl > 0 && r->ray_ngl < M_PI)
-			return (r->cub->textures->SO);
+			return (r->cub->textures->so);
 		else
-			return (r->cub->textures->NO);
+			return (r->cub->textures->no);
 	}
 }
 

@@ -15,24 +15,15 @@
 //checks there is one argument ending in .cub
 void	check_arguments(int argc, char **argv)
 {
+	int		len;
 	char	*temp;
-	int		i;
 
 	if (argc != 2)
 		exit_game(get_data()->game, "Wrong number of arguments");
 	temp = argv[1];
-	i = ft_strlen(temp);
-	while (i > 0 && temp[i] != '.')
-		i--;
-	if (i == 0 && temp[i] == '.')
-		exit_game(get_data()->game, "Hidden file");
-	if (!temp[i + 1] || !(temp[i + 1] == 'c'))
-		exit_game(get_data()->game, "Wrong file extension");
-	if (!temp[i + 2] || !(temp[i + 2] == 'u'))
-		exit_game(get_data()->game, "Wrong file extension");
-	if (!temp[i + 3] || !(temp[i + 3] == 'b'))
-		exit_game(get_data()->game, "Wrong file extension");
-	if (temp[i + 4] != 0)
+	len = ft_strlen(temp);
+
+	if (len < 4 || ft_strncmp(temp + len - 4, ".cub", 4) != 0)
 		exit_game(get_data()->game, "Wrong file extension");
 }
 
@@ -42,8 +33,10 @@ int	add_color(char *str)
 	char	**nb;
 
 	tab = ft_split(str, ' ');
+	if (!tab || !tab[1])
+		return (ft_free2(INVALID, tab));
 	nb = ft_split(tab[1], ',');
-	if (check_color(nb) == INVALID)
+	if (!nb || check_color(nb) == INVALID)
 	{
 		ft_free2(INVALID, nb);
 		return (ft_free2(INVALID, tab));
@@ -55,37 +48,43 @@ int	add_color(char *str)
 
 int	add_first_args(char *str)
 {
-	int	result;
+	int	i;
 
-	if (ft_strncmp(str, "NO ", 3) == VALID
-		|| ft_strncmp(str, "SO ", 3) == VALID
-		|| ft_strncmp(str, "WE ", 3) == VALID
-		|| ft_strncmp(str, "EA ", 3) == VALID)
-	{
-		result = add_texture(str);
-		return (result);
-	}
-	if (ft_strncmp(str, "C ", 2) == VALID
-		|| ft_strncmp(str, "F ", 2) == VALID)
-	{
-		result = add_color(str);
-		return (result);
-	}
+	i = 0;
+	if (ft_strncmp(str + i, "NO ", 3) == VALID
+		|| ft_strncmp(str + i, "SO ", 3) == VALID
+		|| ft_strncmp(str + i, "WE ", 3) == VALID
+		|| ft_strncmp(str + i, "EA ", 3) == VALID)
+		return (add_texture(str + i));
+	if (ft_strncmp(str + i, "C ", 2) == VALID
+		|| ft_strncmp(str + i, "F ", 2) == VALID)
+		return (add_color(str + i));
 	return (INVALID);
 }
 
-int	check_first_args(char *str)
+
+int	check_first_args(char *trimmed)
 {
-	if (*str && str[0] == '\n')
+	char	*str;
+
+	if (*trimmed && trimmed[0] == '\n')
 		return (VALID);
+	str = ft_strtrim(trimmed, "\n \t");
 	if (ft_strncmp(str, "NO ", 3) == VALID
 		|| ft_strncmp(str, "SO ", 3) == VALID
 		|| ft_strncmp(str, "WE ", 3) == VALID
 		|| ft_strncmp(str, "EA ", 3) == VALID)
+	{
+		free(str);
 		return (VALID);
+	}
 	if (ft_strncmp(str, "C ", 2) == VALID
 		|| ft_strncmp(str, "F ", 2) == VALID)
+	{
+		free(str);
 		return (VALID);
+	}
+	free(str);
 	return (INVALID);
 }
 

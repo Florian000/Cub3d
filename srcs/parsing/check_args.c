@@ -85,7 +85,7 @@ void	read_map2(char *str, int *error, char *trimmed, int fd)
 {
 	while (str && check_first_args(str) == VALID)
 	{
-		trimmed = ft_strtrim(str, "\n");
+		trimmed = ft_strtrim(str, "\n \t");
 		free(str);
 		str = trimmed;
 		if (str != NULL && str[0] != 0 && add_first_args(str) == INVALID)

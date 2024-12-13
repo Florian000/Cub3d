@@ -18,10 +18,10 @@ void	draw_floor_ceiling(t_data *cub, int ray, int ceiling_p, int floor_p)
 
 	i = floor_p;
 	while (i < HEIGHT)
-		my_mlx_pixel_put(cub->game->mlx_img, ray, i++, cub->F->color);
+		my_mlx_pixel_put(cub->game->mlx_img, ray, i++, cub->f->color);
 	i = 0;
 	while (i < ceiling_p)
-		my_mlx_pixel_put(cub->game->mlx_img, ray, i++, cub->C->color);
+		my_mlx_pixel_put(cub->game->mlx_img, ray, i++, cub->c->color);
 }
 
 void	draw_wall(t_game *game, int ray, int ceiling_p, int floor_p)

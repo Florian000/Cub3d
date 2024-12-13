@@ -87,6 +87,32 @@ int	check_color(char **nb)
 	return (VALID);
 }
 
+int	ft_isnotdigit(char c)
+{
+	if (c < '0' || c > '9')
+		return (VALID);
+	return (INVALID);
+}
+
+int	only_nb(char *nb1, char *nb2, char *nb3)
+{
+	int i;
+
+	i = -1;
+	while (nb1[++i])
+		if (ft_isnotdigit(nb1[i]) == VALID)
+			return (INVALID);
+	i = -1;
+	while (nb2[++i])
+		if (ft_isnotdigit(nb2[i]) == VALID)
+			return (INVALID);
+	i = -1;
+	while (nb3[++i])
+		if (ft_isnotdigit(nb3[i]) == VALID)
+			return (INVALID);
+	return (VALID);
+}
+
 int	add_color_to_data(char **nb, char *color)
 {
 	t_color	*c;
@@ -94,6 +120,8 @@ int	add_color_to_data(char **nb, char *color)
 	if (ft_strncmp(color, "F", 2) == VALID)
 	{
 		c = get_data()->f;
+		if (only_nb(nb[0], nb[1],nb[2]) == INVALID)
+			exit_game(get_data()->game, "colors : not a nb");
 		c->r = ft_atoi(nb[0]);
 		c->g = ft_atoi(nb[1]);
 		c->b = ft_atoi(nb[2]);
@@ -101,6 +129,8 @@ int	add_color_to_data(char **nb, char *color)
 	if (ft_strncmp(color, "C", 2) == VALID)
 	{
 		c = get_data()->c;
+		if (only_nb(nb[0], nb[1],nb[2]) == INVALID)
+			exit_game(get_data()->game, "colors : not a nb");
 		c->r = ft_atoi(nb[0]);
 		c->g = ft_atoi(nb[1]);
 		c->b = ft_atoi(nb[2]);
