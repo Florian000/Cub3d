@@ -1,8 +1,8 @@
 NO ./textures/wood.xpm
 SO ./textures/container.xpm
 WE ./textures/lava.xpm
-EA ./textures/card.xpm
-F 220,100,0
+EA card.xpm
+F aa0,100,0
 C 225,30,0
 
 

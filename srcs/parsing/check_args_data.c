@@ -37,16 +37,16 @@ int	add_texture_to_data(char **tab)
 	t = get_data()->textures;
 	if (!tab[0] || !tab[1])
 		return (err("Invalid texture format or missing arguments"));
-	if (ft_strncmp(tab[0], "NO", 3) == VALID)
+	if (ft_strncmp(tab[0], "NO", 3) == VALID && (t->no->path == NULL))
 		return (sub_add_txt(t->no, tab));
-	else if (ft_strncmp(tab[0], "SO", 3) == VALID)
+	else if (ft_strncmp(tab[0], "SO", 3) == VALID && (t->so->path == NULL))
 		return (sub_add_txt(t->so, tab));
-	else if (ft_strncmp(tab[0], "WE", 3) == VALID)
+	else if (ft_strncmp(tab[0], "WE", 3) == VALID && (t->we->path == NULL))
 		return (sub_add_txt(t->we, tab));
-	else if (ft_strncmp(tab[0], "EA", 3) == VALID)
+	else if (ft_strncmp(tab[0], "EA", 3) == VALID && (t->ea->path == NULL))
 		return (sub_add_txt(t->ea, tab));
 	else
-		return (err("Unknown texture identifier"));
+		exit_game(get_data()->game, "Invalid texture assignment");
 	return (VALID);
 }
 

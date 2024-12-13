@@ -1,10 +1,11 @@
 NO ./textures/wood.xpm
+EA ./textures/card.xpm
 SO ./textures/container.xpm
 WE ./textures/lava.xpm
 EA ./textures/card.xpm
 F 220,100,0
 C 225,30,0
-
+F 220,225,10
 
         1111111111111111111111111
         1000000000110000000000001

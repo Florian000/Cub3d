@@ -1,7 +1,7 @@
 # Variables
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = cub3d
+NAME = cub3D
 SRCDIR = srcs
 OBJDIR = objs
 LIBFTDIR = include/libft

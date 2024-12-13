@@ -38,8 +38,8 @@ int	add_color_to_data(char **nb, char *color)
 	if (ft_strncmp(color, "F", 2) == VALID)
 	{
 		c = get_data()->f;
-		if (only_nb(nb[0], nb[1], nb[2]) == INVALID)
-			exit_game(get_data()->game, "colors : not a nb");
+		if (only_nb(nb[0], nb[1], nb[2]) == INVALID || c->r != -1)
+			exit_game(get_data()->game, "colors problem");
 		c->r = ft_atoi(nb[0]);
 		c->g = ft_atoi(nb[1]);
 		c->b = ft_atoi(nb[2]);
@@ -47,8 +47,8 @@ int	add_color_to_data(char **nb, char *color)
 	if (ft_strncmp(color, "C", 2) == VALID)
 	{
 		c = get_data()->c;
-		if (only_nb(nb[0], nb[1], nb[2]) == INVALID)
-			exit_game(get_data()->game, "colors : not a nb");
+		if (only_nb(nb[0], nb[1], nb[2]) == INVALID || c->r != -1)
+			exit_game(get_data()->game, "colors problem");
 		c->r = ft_atoi(nb[0]);
 		c->g = ft_atoi(nb[1]);
 		c->b = ft_atoi(nb[2]);

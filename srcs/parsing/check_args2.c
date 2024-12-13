@@ -91,6 +91,7 @@ int	check_files_open(t_data *data)
 	t_textures	*t;
 
 	t = data->textures;
+	printf("here %s\n", t->ea->path);
 	if (open(t->ea->path, O_RDONLY) < 0)
 		exit_game(data->game, "path of txt");
 	if (open(t->we->path, O_RDONLY) < 0)
