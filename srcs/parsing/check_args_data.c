@@ -46,7 +46,7 @@ int	add_texture_to_data(char **tab)
 	else if (ft_strncmp(tab[0], "EA", 3) == VALID && (t->ea->path == NULL))
 		return (sub_add_txt(t->ea, tab));
 	else
-		exit_game(get_data()->game, "Invalid texture assignment");
+		return (INVALID);
 	return (VALID);
 }
 

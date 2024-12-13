@@ -91,16 +91,24 @@ int	check_first_args(char *trimmed)
 int	check_files_open(t_data *data)
 {
 	t_textures	*t;
+	int			fd;
 
 	t = data->textures;
-	printf("here %s\n", t->ea->path);
-	if (open(t->ea->path, O_RDONLY) < 0)
+	fd = open(t->ea->path, O_RDONLY);
+	if (fd < 0)
 		exit_game(data->game, "path of txt");
-	if (open(t->we->path, O_RDONLY) < 0)
+	close(fd);
+	fd = open(t->ea->path, O_RDONLY);
+	if (fd < 0)
 		exit_game(data->game, "path of txt");
-	if (open(t->no->path, O_RDONLY) < 0)
+	close(fd);
+	fd = open(t->ea->path, O_RDONLY);
+	if (fd < 0)
 		exit_game(data->game, "path of txt");
-	if (open(t->so->path, O_RDONLY) < 0)
+	close(fd);
+	fd = open(t->ea->path, O_RDONLY);
+	if (fd < 0)
 		exit_game(data->game, "path of txt");
+	close(fd);
 	return (VALID);
 }
