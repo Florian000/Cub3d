@@ -1,9 +1,9 @@
 NO ./textures/wood.xpm
-SO ./textures/wood.xpm
-WE ./textures/wood.xpm
-EA ./textures/wood.xpm
+SO ./textures/container.xpm
+WE ./textures/    lava.xpm
+EA ./textures/card.xpm
 F 220,100,0
-C 0,30,200
+C 225,30,0
 
 
         1111111111111111111111111
