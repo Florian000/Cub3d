@@ -98,15 +98,15 @@ int	check_files_open(t_data *data)
 	if (fd < 0)
 		exit_game(data->game, "path of txt");
 	close(fd);
-	fd = open(t->ea->path, O_RDONLY);
+	fd = open(t->no->path, O_RDONLY);
 	if (fd < 0)
 		exit_game(data->game, "path of txt");
 	close(fd);
-	fd = open(t->ea->path, O_RDONLY);
+	fd = open(t->we->path, O_RDONLY);
 	if (fd < 0)
 		exit_game(data->game, "path of txt");
 	close(fd);
-	fd = open(t->ea->path, O_RDONLY);
+	fd = open(t->so->path, O_RDONLY);
 	if (fd < 0)
 		exit_game(data->game, "path of txt");
 	close(fd);
