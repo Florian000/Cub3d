@@ -107,7 +107,7 @@ typedef struct s_pathf
 
 typedef struct s_pathf2
 {
-	int up;
+	int	up;
 	int	down;
 	int	left;
 	int	right;

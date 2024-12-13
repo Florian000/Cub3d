@@ -17,7 +17,6 @@
 	-tab = 1 space ? to change to 4 ?
 */
 
-//gives accessto data
 t_data	*get_data(void)
 {
 	static t_data	data;
