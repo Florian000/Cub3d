@@ -95,6 +95,24 @@ typedef struct s_game
 	t_data		*cub;
 }	t_game;
 
+typedef struct s_pathf
+{
+	int	player_x;
+	int	player_y;
+	int	**visited;
+	int	can_escape;
+	int	i;
+	int	j;
+}	t_pathf;
+
+typedef struct s_pathf2
+{
+	int up;
+	int	down;
+	int	left;
+	int	right;
+}	t_pathf2;
+
 typedef struct s_data
 {
 	t_map		*map;
