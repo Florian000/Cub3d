@@ -1,0 +1,8 @@
+NO ./textures/bricks1.xpm
+SO ./textures/dirt.xpm
+WE ./textures/lava.xp
+EA ./textures/bricks2.xpm
+
+F 220,100,00
+C 225,30,00
+

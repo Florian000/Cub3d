@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 20:43:50 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:18:24 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	game_loop(t_game *game)
 	return (EXIT_SUCCESS);
 }
 
+int	close_win(t_game *g)
+{
+	exit_game(g, NULL);
+	return (EXIT_FAILURE);
+}
+
 int	launcher(t_game *g)
 {
 	g->mlx_p = mlx_init();
@@ -65,7 +71,7 @@ int	launcher(t_game *g)
 	mlx_put_image_to_window(g->mlx_p, g->mlx_win, g->mlx_img, 0, 0);
 	mlx_hook(g->mlx_win, KeyPress, KeyPressMask, &key_press, g->player);
 	mlx_hook(g->mlx_win, KeyRelease, KeyReleaseMask, &key_release, g->player);
-	mlx_hook(g->mlx_win, 33, 1L << 17, exit_game, g);
+	mlx_hook(g->mlx_win, 33, 1L << 17, close_win, g);
 	mlx_loop_hook(g->mlx_p, &game_loop, g);
 	mlx_loop(g->mlx_p);
 	exit_game(g, NULL);

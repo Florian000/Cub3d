@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args_data.c                                  :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:03:41 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:47:24 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:18:46 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define RED			"\033[1;31m" 
 # define YELLOW			"\033[1;33m"
 # define BLUE			"\033[1;34m"
+# define RST			"\033[0m"
 
 void		check_arguments(int argc, char **argv);
 void		read_map(char *file);
