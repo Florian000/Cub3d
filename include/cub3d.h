@@ -61,6 +61,7 @@ void		validate_map2(int *i, int *j, int *player_x, int *player_y);
 int			fill_real_map(void);
 int			validate_map(t_map *map);
 int			init_map(t_data *data);
+int			ft_isnotdigit(char c);
 int			init_data(void);
 int			init_text(t_texture *t);
 int			err(char *str);

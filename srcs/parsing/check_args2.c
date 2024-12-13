@@ -22,7 +22,6 @@ void	check_arguments(int argc, char **argv)
 		exit_game(get_data()->game, "Wrong number of arguments");
 	temp = argv[1];
 	len = ft_strlen(temp);
-
 	if (len < 4 || ft_strncmp(temp + len - 4, ".cub", 4) != 0)
 		exit_game(get_data()->game, "Wrong file extension");
 }
@@ -61,7 +60,6 @@ int	add_first_args(char *str)
 		return (add_color(str + i));
 	return (INVALID);
 }
-
 
 int	check_first_args(char *trimmed)
 {
