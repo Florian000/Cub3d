@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvittoz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:04:45 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:04:47 by jvittoz          ###   ########.fr       */
+/*   Updated: 2024/12/13 20:23:04 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_nb_player(t_data *data)
 	i = 0;
 	res = 0;
 	m = data->map->brut_map;
-	while (m[i])
+	while (m && m[i])
 	{
 		j = 0;
 		while (m[i][j])

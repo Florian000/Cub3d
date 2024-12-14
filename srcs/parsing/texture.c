@@ -113,10 +113,10 @@ void	init_text_map(t_texture *t)
 int	init_text(t_texture *t)
 {
 	t->lines = get_xpmfile(t->path);
-	if (t->lines == NULL)
-		return (err("Bad malloc / fd"));
-	if (ft_strncmp(t->lines[0], "/* XPM */", 9) != 0)
-		return (INVALID);
+	if (t->lines == NULL || !t->lines[0])
+		exit_game(get_data()->game, "xml file pb");
+	if (t->lines[0] && ft_strncmp(t->lines[0], "/* XPM */", 9) != 0)
+		exit_game(get_data()->game, " bad xml file");
 	get_params(t);
 	init_text_map(t);
 	return (VALID);

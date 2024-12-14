@@ -1,7 +1,7 @@
-NO ./textures/wokgkjkjod.xpm
-SO ./textures/container.xpm
-WE ./textures/lava.xpm
-EA ./textures/card.xpm
+NO ./textures/cun3D.xp
+SO ./textures/bricks1.xpm
+WE ./textures/bricks1.xpm
+EA ./textures/bricks1.xpm
 F 0,250,0
 C 225,30,0
 
