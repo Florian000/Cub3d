@@ -20,13 +20,13 @@ int	sub_add_txt(t_texture *t, char **tab)
 	{
 		t = malloc(sizeof(t_texture));
 		if (!t)
-			return (err("bad malloc"));
+			exit_game(get_data()->game, "malloc pb");
 	}
 	if (t->path)
 		free(t->path);
 	t->path = ft_strdup(tab[1]);
 	if (!t->path)
-		return (err("bad malloc"));
+		exit_game(get_data()->game, "malloc pb");
 	return (VALID);
 }
 
@@ -36,7 +36,7 @@ int	add_texture_to_data(char **tab)
 
 	t = get_data()->textures;
 	if (!tab[0] || !tab[1])
-		return (err("Invalid texture format or missing arguments"));
+		exit_game(get_data()->game, "read txt pb");
 	if (ft_strncmp(tab[0], "NO", 3) == VALID && (t->no->path == NULL))
 		return (sub_add_txt(t->no, tab));
 	else if (ft_strncmp(tab[0], "SO", 3) == VALID && (t->so->path == NULL))
