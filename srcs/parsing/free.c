@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvittoz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:03:50 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:07:58 by jvittoz          ###   ########.fr       */
+/*   Updated: 2024/12/14 18:12:57 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,6 @@ int	free_map(t_map *map)
 	return (VALID);
 }
 
-int	free_texture(t_texture *t)
-{
-	int	i;
-
-	i = 0;
-	if (t->path)
-		free(t->path);
-	if (t->color)
-		free(t->color);
-	if (t->key)
-		free(t->key);
-	if (t->data)
-		free(t->data);
-	if (t->lines)
-	{
-		while (t->lines[i])
-			free(t->lines[i++]);
-		free(t->lines);
-	}
-	free(t);
-	return (VALID);
-}
-
 void	null_loop(t_data *data)
 {
 	data->c = NULL;
@@ -84,22 +61,14 @@ void	null_loop(t_data *data)
 	data->textures = NULL;
 }
 
-int	free_data(t_data *data)
+void	free_data(t_data *data)
 {
 	if (data == NULL)
-		return (INVALID);
+		return ;
 	if (data->c)
 		free(data->c);
 	if (data->f)
 		free(data->f);
-	if (data->game)
-	{
-		free(data->game->player);
-		free(data->game->ray);
-		free(data->game);
-	}
-	if (data->map)
-		free_map(data->map);
 	if (data->textures)
 	{
 		free_texture(data->textures->ea);
@@ -108,7 +77,15 @@ int	free_data(t_data *data)
 		free_texture(data->textures->we);
 		free(data->textures);
 	}
+	if (data->game)
+	{
+		free_mlx(data->game);
+		free(data->game->player);
+		free(data->game->ray);
+		free(data->game);
+	}
+	if (data->map)
+		free_map(data->map);
 	null_loop(data);
 	data = NULL;
-	return (VALID);
 }

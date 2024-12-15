@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_finder.c                                      :+:      :+:    :+:   */
+/*   check_args2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvittoz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:04:45 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:04:47 by jvittoz          ###   ########.fr       */
+/*   Updated: 2024/12/14 17:32:35 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	check_arguments(int argc, char **argv)
 	char	*temp;
 
 	if (argc != 2)
-		exit_game(get_data()->game, "Wrong number of arguments");
+		exit_game("Wrong number of arguments");
 	temp = argv[1];
 	len = ft_strlen(temp);
 	if (len <= 4 || ft_strncmp(temp + len - 4, ".cub", 4) != 0)
-		exit_game(get_data()->game, "Wrong file extension");
+		exit_game("Wrong file extension");
 	if (len > 4 && temp[ft_strlen(temp) - 5] == '/')
-		exit_game(get_data()->game, "Sneky bad file");
+		exit_game("Sneky bad file");
 }
 
 int	add_color(char *str)
@@ -96,19 +96,19 @@ int	check_files_open(t_data *data)
 	t = data->textures;
 	fd = open(t->ea->path, O_RDONLY);
 	if (fd < 0)
-		exit_game(data->game, "path of txt");
+		exit_game("path of txt");
 	close(fd);
 	fd = open(t->no->path, O_RDONLY);
 	if (fd < 0)
-		exit_game(data->game, "path of txt");
+		exit_game("path of txt");
 	close(fd);
 	fd = open(t->we->path, O_RDONLY);
 	if (fd < 0)
-		exit_game(data->game, "path of txt");
+		exit_game("path of txt");
 	close(fd);
 	fd = open(t->so->path, O_RDONLY);
 	if (fd < 0)
-		exit_game(data->game, "path of txt");
+		exit_game("path of txt");
 	close(fd);
 	return (VALID);
 }

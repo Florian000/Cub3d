@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:03:32 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 20:06:16 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:32:01 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,11 @@ void	read_map(char *file)
 	trimmed = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_game(get_data()->game, "could not open fd");
+		exit_game("could not open fd");
 	str = get_next_line(fd);
 	read_map2(str, &error, trimmed, fd);
 	str = NULL;
 	close(fd);
 	if (error > 0)
-		exit_game(get_data()->game, "Failed to read the map");
+		exit_game("Failed to read the map");
 }

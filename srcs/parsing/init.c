@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:04:08 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 20:14:00 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:28:34 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,15 @@ t_texture	*init_texture(void)
 	res = malloc(sizeof(t_texture));
 	if (!res)
 		return (NULL);
-	res->data = NULL;
-	res->color = NULL;
+	res->cub = NULL;
+	res->addr_img = NULL;
 	res->height = 0;
-	res->key = NULL;
-	res->lines = NULL;
-	res->nb_colors = 0;
+	res->endian = 0;
+	res->img = NULL;
+	res->size_line = 0;
 	res->path = NULL;
 	res->width = 0;
+	res->bpp = 0;
 	return (res);
 }
 
@@ -75,6 +76,8 @@ int	init_textures(t_data *data)
 	t->no = init_texture();
 	t->so = init_texture();
 	t->we = init_texture();
+	if (!t->ea || !t->no || !t->so || !t->we)
+		return (INVALID);
 	data->textures = t;
 	return (VALID);
 }

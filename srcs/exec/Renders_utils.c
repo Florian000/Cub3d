@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 20:41:50 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:15:17 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,7 @@ t_texture	*get_texture(t_ray *r, int flag)
 
 int	get_color(t_texture *texture, int x, int y)
 {
-	int	i;
-
-	i = 0;
-	while (i < texture->nb_colors && texture->key[i]
-		!= texture->data[y * texture->width + x])
-		i++;
-	return (texture->color[i]);
+	return (texture->addr_img[y * texture->width + x]);
 }
 
 double	get_xpm_x(t_texture *t, t_ray *ray)

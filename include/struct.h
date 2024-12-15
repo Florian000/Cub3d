@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args_data.c                                  :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:03:41 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:47:24 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:24:48 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -37,14 +38,14 @@ typedef struct t_color
 typedef struct s_texture
 {
 	char	*path;
-	char	**lines;
+	void	*img;
 	int		width;
 	int		height;
-	int		nb_colors;
-	int		key_size;
-	int		*color;
-	int		*key;
-	int		*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		*addr_img;
+	t_data	*cub;
 }	t_texture;
 
 typedef struct s_textures

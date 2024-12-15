@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/08 20:57:39 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:38:43 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-/*
-	-open map message error -> new lines in map
-	-recheck E S N W
-	-tab = 1 space ? to change to 4 ?
-	-colors are very tollerent...
-*/
 
 t_data	*get_data(void)
 {
@@ -27,11 +21,13 @@ t_data	*get_data(void)
 
 int	main(int argc, char **argv)
 {
-	init_data();
+	if (init_data() == INVALID)
+	{
+		exit_game("Initialisation error");
+		return (INVALID);
+	}
 	parsing(argc, argv);
-	init_game(get_data());
-	welcome_print();
 	launcher(get_data()->game);
-	exit_game(get_data()->game, NULL);
+	exit_game(NULL);
 	return (VALID);
 }

@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:29:36 by fgranger          #+#    #+#             */
-/*   Updated: 2024/12/13 20:18:24 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:23:27 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,32 @@ void	init_player(t_data *cub)
 	cub->game->player->cub = cub;
 }
 
-int	init_game(t_data *cub)
+void	init_text(t_texture *t, t_game *g)
 {
-	init_player(cub);
-	if (init_text(cub->textures->ea) == INVALID)
-		return (INVALID);
-	if (init_text(cub->textures->no) == INVALID)
-		return (INVALID);
-	if (init_text(cub->textures->we) == INVALID)
-		return (INVALID);
-	if (init_text(cub->textures->so) == INVALID)
-		return (INVALID);
-	cub->f->color = get_rgb(cub->f->r, cub->f->g, cub->f->b);
-	cub->c->color = get_rgb(cub->c->r, cub->c->g, cub->c->b);
-	return (VALID);
+	int	*x;
+
+	t->img = mlx_xpm_file_to_image(g->mlx_p, t->path, &t->width, &t->height);
+	if (!t->img)
+		exit_game("Failed to read XPM");
+	x = (int *)mlx_get_data_addr(t->img, &t->bpp, &t->size_line, &t->endian);
+	if (!x)
+		exit_game("Failed mlx get data");
+	t->addr_img = x;
+}
+
+void	init_game(t_game *g, t_textures *t)
+{
+	init_player(g->cub);
+	t->ea->cub = g->cub;
+	t->no->cub = g->cub;
+	t->so->cub = g->cub;
+	t->we->cub = g->cub;
+	init_text(t->ea, g);
+	init_text(t->no, g);
+	init_text(t->so, g);
+	init_text(t->we, g);
+	g->cub->f->color = get_rgb(g->cub->f->r, g->cub->f->g, g->cub->f->b);
+	g->cub->c->color = get_rgb(g->cub->c->r, g->cub->c->g, g->cub->c->b);
 }
 
 int	game_loop(t_game *game)
@@ -50,30 +62,26 @@ int	game_loop(t_game *game)
 	return (EXIT_SUCCESS);
 }
 
-int	close_win(t_game *g)
-{
-	exit_game(g, NULL);
-	return (EXIT_FAILURE);
-}
-
 int	launcher(t_game *g)
 {
 	g->mlx_p = mlx_init();
 	if (g->mlx_p == NULL)
-		exit_game(g, "mlx init error");
+		exit_game("mlx init error");
+	init_game(get_data()->game, get_data()->textures);
+	welcome_print();
 	g->mlx_img = mlx_new_image(g->mlx_p, WIDTH, HEIGHT);
 	if (g->mlx_img == NULL)
-		exit_game(g, "mlx new image error");
+		exit_game("mlx new image error");
 	g->mlx_win = mlx_new_window(g->mlx_p, WIDTH, HEIGHT, WIN_NAME);
 	if (g->mlx_win == NULL)
-		exit_game(g, "mlx new window error");
+		exit_game("mlx new window error");
 	cast_rays(g->ray, g->player);
 	mlx_put_image_to_window(g->mlx_p, g->mlx_win, g->mlx_img, 0, 0);
 	mlx_hook(g->mlx_win, KeyPress, KeyPressMask, &key_press, g->player);
 	mlx_hook(g->mlx_win, KeyRelease, KeyReleaseMask, &key_release, g->player);
-	mlx_hook(g->mlx_win, 33, 1L << 17, close_win, g);
+	mlx_hook(g->mlx_win, 33, 1L << 17, exit_game, NULL);
 	mlx_loop_hook(g->mlx_p, &game_loop, g);
 	mlx_loop(g->mlx_p);
-	exit_game(g, NULL);
+	exit_game(NULL);
 	return (EXIT_SUCCESS);
 }

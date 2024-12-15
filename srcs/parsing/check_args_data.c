@@ -6,7 +6,7 @@
 /*   By: fgranger <fgranger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:03:41 by jvittoz           #+#    #+#             */
-/*   Updated: 2024/12/08 19:47:24 by fgranger         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:32:56 by fgranger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	sub_add_txt(t_texture *t, char **tab)
 	{
 		t = malloc(sizeof(t_texture));
 		if (!t)
-			exit_game(get_data()->game, "malloc pb");
+			exit_game("malloc pb");
 	}
 	if (t->path)
 		free(t->path);
 	t->path = ft_strdup(tab[1]);
 	if (!t->path)
-		exit_game(get_data()->game, "malloc pb");
+		exit_game("malloc pb");
 	return (VALID);
 }
 
@@ -36,7 +36,7 @@ int	add_texture_to_data(char **tab)
 
 	t = get_data()->textures;
 	if (!tab[0] || !tab[1])
-		exit_game(get_data()->game, "read txt pb");
+		exit_game("read txt pb");
 	if (ft_strncmp(tab[0], "NO", 3) == VALID && (t->no->path == NULL))
 		return (sub_add_txt(t->no, tab));
 	else if (ft_strncmp(tab[0], "SO", 3) == VALID && (t->so->path == NULL))

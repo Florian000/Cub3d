@@ -1,7 +1,7 @@
-NO ./textures/cub3D.xpm
-SO ./textures/cub3D.xpm
-WE ./textures/cub3D.xpm
-EA ./textures/cub3D.xpm
+NO ./textures/container.xpm
+SO ./textures/card.xpm
+WE ./textures/card.xpm
+EA ./textures/wood.xpm
 
 C 225,30,00
 F 225,30,00
