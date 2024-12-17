@@ -48,14 +48,6 @@ int	key_press(int key, t_player *player)
 	return (EXIT_SUCCESS);
 }
 
-int	check_wall(int new_x, int new_y, t_map *map)
-{
-	if ((map->brut_map[new_x] && map->brut_map[new_x][new_y]) 
-		&& map->brut_map[new_x][new_y] == 1)
-		return (INVALID);
-	return (VALID);
-}
-
 void	check_hits(t_player *player, double x, double y, t_map *map)
 {
 	int	new_x;
@@ -71,10 +63,12 @@ void	check_hits(t_player *player, double x, double y, t_map *map)
 		pad_y = -8;
 	new_x = floor((player->pos_x + x + pad_x) / TILE_SIZE);
 	new_y = floor((player->pos_y + y + pad_y) / TILE_SIZE);
-	if (new_y >= map->height  || new_y < 0
+	if (new_y >= map->height || new_y < 0
 		|| new_x < 0 || new_x >= (int)ft_strlen(map->brut_map[new_y]))
 		return ;
-	if (map->brut_map[new_y][new_x] != '1')
+	if (map->brut_map[new_y][new_x] != '1'
+		&& map->brut_map[new_y][(int)(player->pos_x / TILE_SIZE)] != '1'
+		&& map->brut_map[(int)(player->pos_y / TILE_SIZE)][new_x] != '1')
 	{
 		player->pos_x += x;
 		player->pos_y += y;
