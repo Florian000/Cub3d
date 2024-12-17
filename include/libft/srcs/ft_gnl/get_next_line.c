@@ -72,6 +72,11 @@ char	*ft_get_next(char *buffer)
 		return (NULL);
 	}
 	tmp = (char *) malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
+	if (!tmp)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	while (buffer[++i])
 		tmp[j++] = buffer[i];
 	tmp[j] = 0;
