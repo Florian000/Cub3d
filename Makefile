@@ -1,5 +1,5 @@
 # Variables
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = cub3D
 SRCDIR = srcs

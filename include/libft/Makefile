@@ -76,7 +76,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 INCLUDES	=	-I includes
 
-CC			=	gcc
+CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 
 .c.o :	
