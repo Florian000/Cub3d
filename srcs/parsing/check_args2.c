@@ -16,7 +16,9 @@
 void	check_arguments(int argc, char **argv)
 {
 	int		len;
+	int		fd;
 	char	*temp;
+	int		byte;
 
 	if (argc != 2)
 		exit_game("Wrong number of arguments");
@@ -26,6 +28,16 @@ void	check_arguments(int argc, char **argv)
 		exit_game("Wrong file extension");
 	if (len > 4 && temp[ft_strlen(temp) - 5] == '/')
 		exit_game("Sneky bad file");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		exit_game("not a file");
+	byte = read(fd, temp, 1);
+	if (byte == -1)
+	{
+		close(fd);
+		exit_game("not a file");
+	}
+	close(fd);
 }
 
 int	add_color(char *str)
